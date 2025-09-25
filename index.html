@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon Bureau</title>
+    <style>
+        /* Styles de base */
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            overflow: hidden;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            height: 100vh;
+            color: #fff;
+            transition: background-image 0.5s ease-in-out;
+            position: relative;
+        }
+
+        /* Thème clair - par défaut */
+        body {
+            background-image: url('https://4kwallpapers.com/images/wallpapers/windows-11-blue-stock-white-background-light-official-2880x1800-5616.jpg');
+        }
+
+        /* Thème sombre */
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-image: url('https://cdn.shopify.com/s/files/1/0329/9865/3996/t/5/assets/windows_11_background_images-DyTqGW.True?v=1707807819');
+            }
+        }
+        
+        /* Conteneurs des icônes du bureau */
+        .desktop-icons-container {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            display: flex;
+            flex-direction: row;
+            gap: 20px;
+        }
+        
+        .desktop-icons-group {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: flex-start;
+        }
+
+        /* Styles pour les icônes du bureau (défaut : mobiles) */
+        .desktop-icon {
+            width: 80px; /* Taille pour mobile et petits écrans (par défaut) */
+            text-align: center;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 8px;
+            transition: background-color 0.2s;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .desktop-icon:hover {
+            background-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .desktop-icon img {
+            width: 48px; /* Taille de l'image pour mobile */
+            height: 48px;
+            display: block;
+            margin: 0 auto 5px;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+
+        .desktop-icon span {
+            font-size: 11px; /* Taille de la police pour mobile */
+            word-wrap: break-word;
+            color: inherit;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        
+        /* Media Query pour les tablettes et PC (à partir de 768px de largeur) */
+        @media (min-width: 768px) {
+            .desktop-icon {
+                width: 150px; /* Taille plus grande pour les tablettes et PC */
+            }
+            .desktop-icon img {
+                width: 96px; /* Taille de l'image pour tablette et PC */
+                height: 96px;
+            }
+            .desktop-icon span {
+                font-size: 14px; /* Police légèrement plus grande pour la lisibilité */
+            }
+        }
+
+        /* Barre des tâches - Styles fixes pour tous les thèmes */
+        .taskbar {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: fit-content;
+            padding: 0 5px;
+            height: 40px; /* Taille réduite */
+            background-color: rgba(40, 40, 40, 0.7);
+            backdrop-filter: blur(15px);
+            border-radius: 8px 8px 0 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .taskbar-icon {
+            width: 32px; /* Taille réduite */
+            height: 32px; /* Taille réduite */
+            margin: 0 4px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .taskbar-icon:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Le logo de démarrage ne change pas de couleur */
+        .start-button img {
+            width: 22px; /* Taille réduite */
+            height: 22px; /* Taille réduite */
+        }
+
+        /* Réduction de la taille des icônes de la barre des tâches */
+        .taskbar-icon img {
+            width: 24px; /* Taille réduite */
+            height: 24px; /* Taille réduite */
+        }
+        
+        /* Styles pour la fenêtre pop-up (modale) - Mode clair par défaut */
+        .modal {
+            display: none; /* Caché par défaut */
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            overflow: auto;
+        }
+        
+        .modal-content {
+            background-color: #f0f0f0;
+            color: #333;
+            padding: 20px;
+            border: 1px solid #ccc;
+            width: 80%;
+            max-width: 600px;
+            border-radius: 10px;
+            position: relative;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            font-size: 14px;
+            line-height: 1.6;
+            transition: background-color 0.5s, color 0.5s;
+        }
+
+        /* Styles de la modale en mode sombre */
+        @media (prefers-color-scheme: dark) {
+            .modal-content {
+                background-color: #1e1e1e;
+                color: #e0e0e0;
+                border-color: #555;
+            }
+        }
+        
+        .close-button {
+            color: #aaa;
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* Couleur du bouton de fermeture en mode sombre */
+        @media (prefers-color-scheme: dark) {
+            .close-button {
+                color: #888;
+            }
+        }
+
+        .close-button:hover,
+        .close-button:focus {
+            color: #000; /* Plus foncé en mode clair */
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .close-button:hover,
+            .close-button:focus {
+                color: #fff; /* Plus clair en mode sombre */
+            }
+        }
+
+        /* Styles spécifiques pour le conteneur du texte */
+        .modal-text {
+            max-height: 400px;
+            overflow-y: auto;
+            margin-top: 10px;
+        }
+        
+        /* Styles pour la modale présentation (image) */
+        #presentationModal .modal-content,
+        #matricesComportementModal .modal-content {
+            background-color: transparent;
+            border: none;
+            padding: 0;
+            box-shadow: none;
+            max-width: 60%;
+            max-height: 80%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #presentationModal .modal-content img,
+        #matricesComportementModal .modal-content img {
+            max-width: 100%;
+            max-height: 100%;
+            display: block;
+            border-radius: 10px;
+        }
+        
+        /* Styles pour les "boutons" dans la modale - mode clair par défaut */
+        .subject-button {
+            display: block;
+            width: 100%;
+            padding: 10px 15px;
+            margin-bottom: 10px;
+            text-align: left;
+            background-color: #ddd;
+            color: #333;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.2s, transform 0.2s, color 0.2s;
+            text-decoration: none;
+        }
+        
+        .subject-button:hover {
+            background-color: #ccc;
+            transform: translateY(-2px);
+        }
+
+        /* Boutons de la modale en mode sombre */
+        @media (prefers-color-scheme: dark) {
+            .subject-button {
+                background-color: #2b2b2b;
+                color: #e0e0e0;
+            }
+
+            .subject-button:hover {
+                background-color: #3a3a3a;
+            }
+        }
+
+        /* Règle pour corriger la couleur du tableau dans la modale et l'adapter au thème */
+        .modal-content table,
+        .modal-content th,
+        .modal-content td {
+            color: inherit; /* Utilise la couleur du parent, qui est .modal-content */
+        }
+        
+        .arabic-text {
+            direction: rtl;
+            text-align: right;
+            font-family: 'Segoe UI', Arial, sans-serif; /* Assurez-vous d'avoir une police qui supporte l'arabe */
+        }
+
+        /* Nouveau style pour le contenu affiché sous les boutons ADA */
+        .ada-display-content {
+            margin-top: 20px;
+            padding: 15px;
+            border-left: 3px solid #0078d4; /* Bordure colorée pour le style */
+            background-color: rgba(0, 0, 0, 0.05);
+            border-radius: 0 5px 5px 0;
+            font-size: 14px;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .ada-display-content {
+                background-color: rgba(255, 255, 255, 0.05);
+                border-color: #8ab6e7;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="desktop-icons-container">
+        <div class="desktop-icons-group">
+            <a href="#" id="presentation-icon" class="desktop-icon">
+                <img src="https://i.imgur.com/MB6dKKu.jpeg" alt="Moi">
+                <span>Présentation</span>
+            </a>
+            <a href="#" id="ib-resources-icon" class="desktop-icon">
+                <img src="https://www.sek.es/wp-content/uploads/colegio-del-mundo-IB.jpg" alt="Ressources IB transversales">
+                <span>Ressources IB</span>
+            </a>
+            <a href="#" id="matières-icon" class="desktop-icon">
+                <img src="https://static.vecteezy.com/ti/vecteur-libre/p1/1736348-ensemble-objets-et-fournitures-scolaires-vectoriel.jpg" alt="Matières">
+                <span>Matières</span>
+            </a>
+            <a href="#" id="interdisciplinarité-icon" class="desktop-icon">
+                <img src="https://lejournal.cnrs.fr/sites/default/files/styles/lightbox-hd/public/assets/images/fotolia_84475014_72dpi.jpg?itok=bTerM_re" alt="Interdisciplinarité">
+                <span>Interdisciplinarité</span>
+            </a>
+            <a href="#" id="ada-icon" class="desktop-icon">
+                <img src="https://andrepiolat.csf.bc.ca/wp-content/uploads/sites/5/images/cerclePEI.jpg" alt="Approches de l'apprentissage">
+                <span>Approches de l'apprentissage (ADA)</span>
+            </a>
+        </div>
+
+        <div class="desktop-icons-group">
+            <a href="#" id="developpement-personnel-icon" class="desktop-icon">
+                <img src="https://cityzen-mineraux.fr/-_-/res/191371ed-efcf-4f38-bf28-da05f0d803f9/images/files/191371ed-efcf-4f38-bf28-da05f0d803f9/0ea7d308-01ce-4c5f-9674-19bffa309317/1024-1024/b79417cfa987687d0044778ae703d4f1861e5d8a" alt="Développement personnel">
+                <span>Développement personnel</span>
+            </a>
+            <a href="#" id="politiques-reglements-icon" class="desktop-icon">
+                <img src="https://www.univ-lyon2.fr/medias/photo/illus-reglement_1598966170063-jpg" alt="Politiques et règlements">
+                <span>Politiques et règlements</span>
+            </a>
+        </div>
+    </div>
+
+    <div class="taskbar">
+        <div class="taskbar-icon start-button">
+            <a href="https://almadina.ma" style="display: flex; text-decoration: none;">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLCVT8-N5jNjDRVRZyl4LnXvb6w4QiajtIFw&s" alt="Start">
+            </a>
+        </div>
+        <a href="#" id="taskbar-presentation" class="taskbar-icon">
+            <img src="https://i.imgur.com/MB6dKKu.jpeg" alt="Présentation">
+        </a>
+        <a href="#" id="taskbar-ib-resources" class="taskbar-icon">
+            <img src="https://www.sek.es/wp-content/uploads/colegio-del-mundo-IB.jpg" alt="Ressources IB">
+        </a>
+        <a href="#" id="taskbar-matieres" class="taskbar-icon">
+            <img src="https://static.vecteezy.com/ti/vecteur-libre/p1/1736348-ensemble-objets-et-fournitures-scolaires-vectoriel.jpg" alt="Matières">
+        </a>
+        <a href="#" id="taskbar-interdisciplinarite" class="taskbar-icon">
+            <img src="https://lejournal.cnrs.fr/sites/default/files/styles/lightbox-hd/public/assets/images/fotolia_84475014_72dpi.jpg?itok=bTerM_re" alt="Interdisciplinarité">
+        </a>
+        <a href="#" id="taskbar-ada" class="taskbar-icon">
+            <img src="https://andrepiolat.csf.bc.ca/wp-content/uploads/sites/5/images/cerclePEI.jpg" alt="Approches de l'apprentissage">
+        </a>
+        <a href="#" id="taskbar-developpement-personnel" class="taskbar-icon">
+            <img src="https://cityzen-mineraux.fr/-_-/res/191371ed-efcf-4f38-bf28-da05f0d803f9/images/files/191371ed-efcf-4f38-bf28-da05f0d803f9/0ea7d308-01ce-4c5f-9674-19bffa309317/1024-1024/b79417cfa987687d0044778ae703d4f1861e5d8a" alt="Développement personnel">
+        </a>
+        <a href="#" id="taskbar-politiques-reglements" class="taskbar-icon">
+            <img src="https://www.univ-lyon2.fr/medias/photo/illus-reglement_1598966170063-jpg" alt="Politiques et règlements">
+        </a>
+    </div>
+
+    <div id="presentationModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <img src="https://i.imgur.com/pap2vFu.png" alt="Présentation">
+        </div>
+    </div>
+
+    <div id="matricesComportementModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <img src="https://i.imgur.com/Vo8zG9W.jpeg" alt="Matrices des comportements">
+        </div>
+    </div>
+
+    <div id="ibModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2 style="text-align: center;">Ressources IB transversales</h2>
+            <div class="modal-text">
+                <h3 style="margin-top: 0;">Contextes mondiaux</h3>
+                <ul>
+                    <li>Identités et relations</li>
+                    <li>Orientation dans le temps et l'espace</li>
+                    <li>Innovation scientifique et technique</li>
+                    <li>Mondialisation et durabilité</li>
+                    <li>Équité et développement</li>
+                    <li>Expression personnelle et culturelle</li>
+                </ul>
+                <hr>
+                <h3>Profil de l'apprenant</h3>
+                <ul>
+                    <li>Chercheurs</li>
+                    <li>Informés</li>
+                    <li>Sensés</li>
+                    <li>Communicatifs</li>
+                    <li>Intègres</li>
+                    <li>Ouverts d'esprit</li>
+                    <li>Altruistes</li>
+                    <li>Audacieux</li>
+                    <li>Équilibrés</li>
+                    <li>Réfléchis</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div id="matièresModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2 style="text-align: center;">Matières</h2>
+            <div id="matiere-content-container" class="modal-text">
+                </div>
+        </div>
+    </div>
+
+    <div id="interdisciplinaritéModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2 id="interdis-title" style="text-align: center;">Interdisciplinarité</h2>
+            <div id="interdis-content" class="modal-text">
+                <a href="#" class="subject-button" data-unit="Unité 1">Unité 1</a>
+                <a href="#" class="subject-button" data-unit="Unité 2">Unité 2</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="adaModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2 id="ada-title" style="text-align: center;">Approches de l'apprentissage (ADA)</h2>
+            <div id="ada-content" class="modal-text">
+                </div>
+        </div>
+    </div>
+
+    <div id="developpementPersonnelModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2 style="text-align: center;">Développement personnel</h2>
+            <div class="modal-text">
+                <p>On nous a pas encore dit quoi écrire ici</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="politiquesReglementsModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2 id="politiques-reglements-title" style="text-align: center;">Politiques et règlements</h2>
+            <div id="politiques-reglements-content" class="modal-text">
+                <a href="https://www.ibo.org/globalassets/new-structure/programmes/shared-resources/pdfs/academic-integrity-policy-fr.pdf" target="_blank" class="subject-button">Politique d'intégrité</a>
+                <a href="#" class="subject-button" data-reglement="Règlement">Règlement</a>
+                <a href="#" class="subject-button" data-reglement="Matrices">Matrices de l'enseignement des comportements</a>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // JavaScript pour les fenêtres modales
+        const presentationModal = document.getElementById("presentationModal");
+        const ibModal = document.getElementById("ibModal");
+        const matiereModal = document.getElementById("matièresModal");
+        const interdisModal = document.getElementById("interdisciplinaritéModal");
+        const adaModal = document.getElementById("adaModal");
+        const developpementPersonnelModal = document.getElementById("developpementPersonnelModal");
+        const politiquesReglementsModal = document.getElementById("politiquesReglementsModal");
+        const matricesComportementModal = document.getElementById("matricesComportementModal");
+        
+        const presentationIcon = document.getElementById("presentation-icon");
+        const ibIcon = document.getElementById("ib-resources-icon");
+        const matiereIcon = document.getElementById("matières-icon");
+        const interdisIcon = document.getElementById("interdisciplinarité-icon");
+        const adaIcon = document.getElementById("ada-icon");
+        const developpementPersonnelIcon = document.getElementById("developpement-personnel-icon");
+        const politiquesReglementsIcon = document.getElementById("politiques-reglements-icon");
+
+        // Nouvelles variables pour les icônes de la barre des tâches
+        const taskbarPresentationIcon = document.getElementById("taskbar-presentation");
+        const taskbarMatieresIcon = document.getElementById("taskbar-matieres");
+        const taskbarIbResourcesIcon = document.getElementById("taskbar-ib-resources");
+        const taskbarPolitiquesReglementsIcon = document.getElementById("taskbar-politiques-reglements");
+        const taskbarAdaIcon = document.getElementById("taskbar-ada");
+        const taskbarInterdisIcon = document.getElementById("taskbar-interdisciplinarite");
+        const taskbarDeveloppementPersonnelIcon = document.getElementById("taskbar-developpement-personnel");
+        
+        const presentationCloseBtn = presentationModal.querySelector(".close-button");
+        const ibCloseBtn = ibModal.querySelector(".close-button");
+        const matiereCloseBtn = matiereModal.querySelector(".close-button");
+        const interdisCloseBtn = interdisModal.querySelector(".close-button");
+        const adaCloseBtn = adaModal.querySelector(".close-button");
+        const developpementPersonnelCloseBtn = developpementPersonnelModal.querySelector(".close-button");
+        const politiquesReglementsCloseBtn = politiquesReglementsModal.querySelector(".close-button");
+        const matricesComportementCloseBtn = matricesComportementModal.querySelector(".close-button");
+
+        
+        const interdisTitle = document.getElementById("interdis-title");
+        const interdisContent = document.getElementById("interdis-content");
+        
+        const adaTitle = document.getElementById("ada-title");
+        const adaContent = document.getElementById("ada-content");
+
+        const politiquesReglementsTitle = document.getElementById("politiques-reglements-title");
+        const politiquesReglementsContent = document.getElementById("politiques-reglements-content");
+
+        // Contenu pour les règles et règlements
+        const reglementContent = `
+            <div class="arabic-text">
+                <p>• أنا لا أضيع أدواتي المدرسية، وأحرص على إحضارها باستمرار، لأنها مكون رئيس من مكونات تعليمي.</p>
+                <p>• أتحمل عواقب خروجي من المؤسسة بين الثانية عشرة والواحدة</p>
+                <p>• ألتزم بالدخول إلى الفصل قبل الوقت المحدد حتى لا أزعج زملائي وأساتذتي وأستفيد من الدرس كاملا.</p>
+                <p>• أتحمل مسؤولية عقابي إذا قمت بسلوك أو تصرف غير لائق.</p>
+                <p>• أنجز واجباتي المنزلية وأحضرها في الوقت المحدد، لأن هذا يدخل ضمن مهامي الأساسية.</p>
+                <p>• ألتزم بتبرير أي غياب أو تأخير للإدارة.</p>
+                <p>• أشارك بفعالية في الأنشطة المدرسية غير الصفية حتى أحقق الأهداف السامية للتعلم.</p>
+                <p>• أحافظ على نظافة قسمي وفضاءات المؤسسة بشكل عام، لأن هذا يدخل ضمن مسؤوليتي كتلميذ مسؤول عن ذاته ومحيط تعلمه.</p>
+                <p>• لا أستعمل الهاتف النقال و الأجهزة الإلكترونية داخل المدرسة ما بين الثامنة و الرابعة زوالا كي أتجنب التورط في مشاكل.</p>
+                <br>
+                <p>• أهتم بهندامي ونظافة جسدي، تكريما لنفسي وإظهارا لنعمة الله علي.</p>
+                <p>• على أحرص أن يكون لباسي محتشما ولائقا ،إرضاء لخالقي واحتراما لنفسي.</p>
+                <p>• على أحرص أن لا تتعدى علاقتي مع الجنس الآخر حدود الشرع لكي أنال رضى الله و أسعد في حياتي.</p>
+                <p>• أعترف بأخطائي بلباقة ،لأجنب نفسي العناد والاصطدام والكذب.</p>
+                <p>• أتقبل ذاتي ومظهري،لأنعم بصحة نفسية جيدة وحياة سعيدة.</p>
+                <p>• أنسجم مع المبادئ المتعارف عليها ومعتقداتي،لأشعر بالرضى والسعادة وأبني صورة إيجابية عن ذاتي.</p>
+                <p>• أحترم الوقت وأقدر قيمته،لأنتفع به ولا أفوت على نفسي الفرص الثمينة .</p>
+                <p>• أحافظ على عباداتي وأتحلى بالقيم الحميدة، وأشكر الله، لأنه استأمنني على ذاتي وسخر الكون لخدمتي.</p>
+                <p>• أحرص على أن يكون كلامي مهذبا وراقيا، لأن كلامي مرآة تعكس احترامي لذاتي.</p>
+                <p>• أنتظر دوري بأدب عند اقتناء وجبة الغذاء،لأجنب نفسي الأذى وأمرنها على السلوكات الحضارية في شتى المواقف.</p>
+                <p>• أحتفظ بهدوئي وحلمي،لأجنب نفسي العصبية والغضب.</p>
+                <p>• أتجنب الغش وأثق في قدراتي لأحقق أهدافي وأصل إلى غاياتي.</p>
+                <p>• أحافظ على سلامة ذاتي، لأنها ملك لله استأمنني عليها فلا يجب أن أخون الأمانة.</p>
+                <p>• أقدر عملي وأتوخى الإحسان فيه لأحقق ذاتي وأسعدها.</p>
+                <p>• أعود نفسي على التعلم الدائم، لأن المعرفة لا حدود لها.</p>
+                <p>• أحرص على أن أكون متفائلا مقبلا على الحياة لأكون سعيدا معطاء وخدوما.</p>
+                <br>
+                <p>• لكي يحترم رأي أحترم رأي الآخر</p>
+                <p>• لاكتساب محبة الآخرين و تقديرهم أتجنب كل المشاجرات و الخصومات و أعتذر عند الخطأ</p>
+                <p>• لاستمرار العلاقات الجيدة و انعدام الخلافات أفسح المجال للآخرين للاعتذار</p>
+                <p>• لكي أستفيد من الشرح و أدرس في جو يسوده الانضباط و الاحترام أحترم قانون القسم</p>
+                <p>• لكسب ثقة و وقار الأستاذ أحترمه و أقدر مادته و أنجز ما طلب مني</p>
+                <p>• لحصول التفاهم مع الآخرين أتكلم بصوت منخفض و أتحاور بالتي هي أحسن</p>
+                <p>• لنيل مودة الآخرين أتكلم باحترام معهم و لا أستهين بهم و أقدر مجهوداتهم</p>
+                <p>• لتجنب التورط في المشاكل أتجنب أخذ صور الآخرين دون إذن منهم</p>
+                <p>• لنيل رضى الله ثم الناس أساعد الآخرين على الصلح فيما بينهم</p>
+                <br>
+                <p>في علاقتي بالمسجد :</p>
+                <ul>
+                    <li>لكوني مؤمن صالح محب لله و رسوله ، ألتزم بآداب المسجد تقديسا لبيت الله تعالى.</li>
+                    <li>لأن النظافة من الإيمان ،فأنا أعتني بنظافة جسدي و ملابسي و خاصة جواربي حتى لا أزعج المصلين و أنال رضا الله تعالى.</li>
+                    <li>لأني مؤمن محب للجمال و النظام ، أضع حذائي في المكان المخصص له قبل الدخول إلى المسجد حتى أتجنب عرقلة المصلين و تشويه مدخله.</li>
+                    <li>لأنني محب للنظام ،أعيد ممتلكات المسجد من قرآن كريم و عبايات و سجاد و كتب إلى مكانها بعد الاستعمال حتى أستفيد منها مرة أخرى و يستفيد منها غيري.</li>
+                    <li>لأنال الأجر و التواب الجزيل ، أعود نفسي على الاهتمام بزينة المسجد و مرافقه.</li>
+                </ul>
+                <br>
+                <p>في علاقتي بالقسم :</p>
+                <ul>
+                    <li>كي أدرس في فضاء نقي و صحي ،أحافظ على نظافتي و نظافة قسمي بتجنب رمي الأوراق و النجارة و الطباشير.</li>
+                    <li>كي أدرس في فضاء نظيف و صحي ، أتجنب الخربشة على الطاولات و السبورة و الجدران ،و إلصاق العلكة تحت الكراسي ، و تكسير حوامل المعاطف.</li>
+                    <li>كي لا أكون أنانيا ، أتجنب إزالة الإخباريات و الوثائق الإدارية من سبورة الإعلام حتى يستفيد و يطلع عليها كل التلاميذ.</li>
+                    <li>كي أدرس في أجواء ملائمة ، أتجنب تكسير النوافذ و الكراسي و الطاولات ،و تقطيع الستائر.</li>
+                    <li>كي أكون أمينا و مؤدبا ، أحترم ممتلكات زملائي، و لا أستعملها إلا بإذن منهم .</li>
+                    <li>كي أكون تلميذا نموذجيا مؤثرا ، أساهم في تزيين قسمي و المحافظة على جماله.</li>
+                </ul>
+                <br>
+                <p>في علاقتي بالمكتبة :</p>
+                <ul>
+                    <li>كي أستفيد أكثر و أتجنب إزعاج زملائي ، ألتزم بآداب المكتبة و قانونها الداخلي .</li>
+                    <li>كي أدرس في فضاء صحي و نقي ، أحافظ على نظافة المكتبة برمي النفايات في مكانها المخصص ، وتجنب تناول الطعام فيها.</li>
+                    <li>كي يستفيد زملائي من مقتنيات و تجهيزات المكتبة و أتجنب الأنانية ، أعيد الكتب التي اقتنيتها في الآجال المحددة دون تمزيقها أو إتلافها.</li>
+                </ul>
+                <br>
+                <p>في علاقتي بالساحة و الممرات و المناطق الخضراء</p>
+                <ul>
+                    <li>كي أعيش في بيئة نظيفة و صحية ، أتجنب رمي الأزبال و نفايات طعامي في الساحة و الممرات و المناطق الخضراء .</li>
+                    <li>كي أكون من أصدقاء البيئة ،أتجنب قطع الورود و الأزهار ، و الكتابة على الجدران .</li>
+                    <li>كي أحافظ على سلامتي و سلامة غيري ، لا أركض في الممرات و الساحة ، أو ألعب الكرة فيها.</li>
+                </ul>
+                <br>
+                <p>في علاقتي بالمطعم</p>
+                <ul>
+                    <li>كي أحافظ على النظام و لا أكون أنانيا ، أحترم دوري في الصف ، و أتجنب الفوضى و التسابق مع الآخرين.</li>
+                    <li>كي أحافظ على البيئة و أتجنب إزعاج المساعدات ، أتناول وجباتي في المكان المخصص لذلك ، و أرمي البقايا في القمامية ، و أعيد الأواني إلى مكانها المخصص.</li>
+                    <li>كي أحافظ على سلامة صحتي ،أشتري من المطعم ما يكفيني من الأغذية الصحية دون تبذير أو إسراف.</li>
+                </ul>
+                <br>
+                <p>في علاقتي بالملاعب و قاعة السينما و المسرح</p>
+                <ul>
+                    <li>كي أحافظ على مبدإ السلامة ، لا أستعمل هذه الفضاءات إلا في الأوقات المحددة لي، أو بعد إذن أحد المسؤولين ( الإدارة – أستاذ الرياضة – أستاذ المسرح ...).</li>
+                    <li>كي أمارس هواياتي في جو صحي و نظيف ، أحافظ على نظافة هذه الفضاءات و أدعو نفسي و زملائي إلى تجنب إلحاق أي ضرر بها.</li>
+                </ul>
+                <br>
+                <p>في علاقتي بالصنابير و المراحيض :</p>
+                <ul>
+                    <li>كي لا أكون مبذرا، أتجنب تضييع الورق الصحي و الصابون و الماء .</li>
+                    <li>كي أحافظ على النظافة ، أتأكد من تنظيف المرحاض بعد قضاء الحاجة</li>
+                </ul>
+                <br>
+                <p>في علاقتي بتجهيزات المختبر و قاعة الإعلاميات :</p>
+                <ul>
+                    <li>كي أستفيد و يستفيد غيري ، أستعمل التجهيزات المخبرية و المعلوماتية بحرص و تركيز حتى لا ألحق الضرر بها. </li>
+                    <li>كي أكون منظما و أمينا ، أعيد التجهيزات التي استعملتها إلى مكانها أو إلى حالتها الأولى حتى أستفيد منها مرة أخرى</li>
+                </ul>
+                <br>
+                <p>في مدارس المدينة، نؤمن أن السلوك القويم ضروري لضمان الظروف الملائمة للحياة الجماعية</p>
+                <p>في مدارس المدينة نشجع على الالتزام بقانون الحياة ولا نقبل الإخلال به</p>
+                <br>
+                <h3>المساعــــدات</h3>
+                <p>إلى جانب النتائج السلبية، سأقبل واحدة أو أكثر من التدابير التي تساعدني على تقويم سلوكي:</p>
+                <ul>
+                    <li>ألتقي بالأستاذ الرئيسي لإيجاد حلول لتقويم سلوكي</li>
+                    <li>أقوم بأعمال إضافية تساعدني على فهم وتقويم تصرفاتي ( بحوث- عروض- تقارير..)</li>
+                    <li>أقوم بتوقيع تعهد أوالتزام بعدم تكرار تصرفاتي السلبية</li>
+                    <li>ألتقي بالمستشار في التوجيه أو أخصائي لتقويم السلوك( طبيب نفساني)</li>
+                    <li>أقوم بإعداد رسالة اعتذار.</li>
+                </ul>
+                <br>
+                <h3>العواقب السلبيــــــة</h3>
+                <p>إذا لم أحترم الضوابط الضرورية لقانون الحياة، سأقبل واحدة أو أكثر من العقوبات التالية:</p>
+                <ul>
+                    <li>أخجل من نفسي وأكون بحالة نفسية سيئة</li>
+                    <li>أساتذتي ووالدي غير فخورين بي</li>
+                    <li>أحجز نصف ساعة خلال فترة الاستراحة الزوالية داخل مكان للتفكير</li>
+                    <li>أحجز مدة محددة داخل قاعة المداومة لإنجاز الواجبات والتمارين.</li>
+                    <li>يستدعى أو يخبر أولياء أمري مع ما يترتب عن ذلك من نتائج</li>
+                    <li>أحرم من الخرجات البيداغوجية والترفيهية ومن الأنشطة الموازية</li>
+                    <li>أقوم بتعويض الأضرار اللاحقة بالأدوات والأجهزة الناجمة عن سلوكي وتصرفاتي</li>
+                    <li>أحرم من ولوج المؤسسة وأظل بمنزلي مدة معينة لكي أفكر مليا في سلوكي</li>
+                    <li>أتوصل بإنذار شفوي أو كتابي</li>
+                    <li>أقوم بأعمال داخل المؤسسة ( ترتيب وتنظيف أماكن تناول الوجبات- تنظيف وترتيب الأقسام ..)</li>
+                    <li>أتحمل قرارات مجلس الانضباط</li>
+                    <li>أقبل تدخل أي طرف من الفاعلين في العملية التربوية (أساتذة، أعوان، إداريون، حراس، مساعدات...) وفي حالة رفضي الانصياع لهم واحترام تدخلهم أتعرض لعقوبات زجرية.</li>
+                    <li>تحتفظ المؤسسة بحقها الكامل في اتخاذ العقوبات الزجرية الملائمة لتقويم سلوكي وتصرفاتي...</li>
+                </ul>
+                <br>
+                <h3>الحوافــــــز</h3>
+                <p>إذا احترمت القواعد المتعلقة بقانون الحياة، بإمكاني أن أستحق واحدة أو أكثر من النتائج والحوافز الإيجابية الآتية:</p>
+                <ul>
+                    <li>أنا فخور بنفسي أكون سعيدا</li>
+                    <li>أساتذتي ووالدي فخورون بي</li>
+                    <li>أتلقى عبارات التهاني والتشجيع</li>
+                    <li>أكون سعيدا لأنني أكدت بأفعالي وسلوكي أن قانون الحياة مهم بالنسبة لي</li>
+                    <li>أحصل على شهادة استحقاق أو شهادة تقديرية خصوصا في المناسبات الخاصة ( فسحة الاثنين مثلا)</li>
+                    <li>أحصل على ميزة خاصة تدون في نتائجي وفي مذكرتي السنوية</li>
+                    <li>أستفيد من خرجة خاصة تنظمها المؤسسة</li>
+                </ul>
+                <br>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>السلوك</th>
+                            <th>العقوبة</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>العلكة</td>
+                            <td>أول مرة : إندار شفوي<br>ثاني مرة: حجر من 12س إلى 12س 30د</td>
+                        </tr>
+                        <tr>
+                            <td>عدم إنجاز الواجبات</td>
+                            <td>أول مرة: مراسلة كتابية للآباء<br>ثاني مرة: مراسلة ثانية<br>ثالث مرة: استدعاء الآباء<br>رابع مرة : حرمان التلميذ من جميع الخرجات و الأنشطة الترفيهية<br>في الحالات القصوى : إمضاء التزام بمغادرة المؤسسة<br>مع تدوين الحالات في دفتر القسم</td>
+                        </tr>
+                        <tr>
+                            <td>الثرثرة</td>
+                            <td>- إنذار شفوي<br>- إنذار كتابي<br>- خصم من نقطة السلوك<br>- إخراج التلميذ من القسم avec إخبار الآباء<br>- حجز لمدة ساعتين</td>
+                        </tr>
+                        <tr>
+                            <td>عدم إحضار اللوازم المدرسية</td>
+                            <td>- إنذار شفوي<br>- إنذار كتابي<br>- إخراج التلميذ و إلزامه بإنجاز تمارين معينة في قاعة المداولة مع إخبار الآباء</td>
+                        </tr>
+                        <tr>
+                            <td>عدم إحضار اللوازم المدرسية ( آلة حاسبة، قلم، مسطرة...) أثناء الامتحان</td>
+                            <td>يمنع منعا كليا على التلاميذ استعارة تلك اللوازم حتى يتسنى لهم اجتياز الامتحان في أحسن الظروف</td>
+                        </tr>
+                        <tr>
+                            <td>عدم احترام الزملاء داخل الفصل</td>
+                            <td>- النصح مع إنذار شفوي<br>- إنذار كتابي<br>- خصم من نقطة السلوك<br>- الحرمان من الخرجات و الأنشطة الترفيهية<br>- الحجز لمدة ساعة أو ساعتين<br>- أن يرتب و ينظف التلميذ المعاقب طاولة زميله المتضرر من سلوكه المشين<br>ملاحظة : فيما يخص هذه النقطة تبقى الصلاحية للأست استاذ لتطبيق العقوبة المناسبة حسب طبيعة السلوك</td>
+                        </tr>
+                        <tr>
+                            <td>عدم احترام الأستاذ</td>
+                            <td>- مجلس تأديبي</td>
+                        </tr>
+                        <tr>
+                            <td>الهندام الغير اللائق</td>
+                            <td>- لا يقبل التلاميذ الذين يرتدون هنداما غير لائق ، سواء الإناث أو الذكور.<br>- تلتزم الإناث بارتداء الوزرة.</td>
+                        </tr>
+                        <tr>
+                            <td>الغش</td>
+                            <td>- إذا كان التلميذ قد شرع في الغش، يحصل على صفر مع إخبار الآباء</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <a href="#" class="subject-button back-button" style="text-align: center;">Retour</a>
+        `;
+        
+        // Fonction pour ouvrir une modale spécifique
+        function openModal(modal) {
+            modal.style.display = "flex";
+        }
+
+        // Fonction pour fermer une modale spécifique
+        function closeModal(modal) {
+            modal.style.display = "none";
+        }
+
+        // Modèles de contenu pour les matières et leurs détails
+        const matiereListHTML = `
+            <a href="#" class="subject-button" data-matiere="Français">Français</a>
+            <a href="#" class="subject-button" data-matiere="Arabe">Arabe</a>
+            <a href="#" class="subject-button" data-matiere="Mathématiques">Mathématiques</a>
+            <a href="#" class="subject-button" data-matiere="Éducation islamique">Éducation islamique</a>
+            <a href="#" class="subject-button" data-matiere="Sciences de la Vie et de la Terre">Sciences de la Vie et de la Terre</a>
+            <a href="#" class="subject-button" data-matiere="Anglais">Anglais</a>
+            <a href="#" class="subject-button" data-matiere="Physique chimie">Physique chimie</a>
+            <a href="#" class="subject-button" data-matiere="Informatique/Robotique">Informatique/Robotique</a>
+            <a href="#" class="subject-button" data-matiere="Histoire-Géographie">Histoire-Géographie</a>
+            <a href="#" class="subject-button" data-matiere="Design">Design</a>
+            <a href="#" class="subject-button" data-matiere="Service communautaire">Service communautaire</a>
+            <a href="#" class="subject-button" data-matiere="Éducation artistique">Éducation artistique</a>
+            <a href="#" class="subject-button" data-matiere="Théâtre">Théâtre</a>
+            <a href="#" class="subject-button">Professeur Principal</a>
+            <a href="#" class="subject-button">Arts plastiques</a>
+        `;
+
+        const matiereDetailsHTML = `
+            <a href="#" class="subject-button" data-action="objectifs">Les objectifs de la matière</a>
+            <a href="#" class="subject-button" data-action="criteres">Les critères d'évaluation</a>
+            <a href="#" class="subject-button" data-action="concepts">Les concepts étudiés</a>
+            <a href="#" class="subject-button" data-action="reflexions">Les réflexions des élèves sur les apprentissages et la compréhension conceptuelle, ainsi que les axes de progrès identifiés suite à chaque unité</a>
+            <a href="#" class="subject-button back-button">Retour aux matières</a>
+        `;
+        
+        // Fonctions pour la gestion du contenu de la modale ADA
+        function showAdaMainContent() {
+            adaTitle.textContent = "Approches de l'apprentissage (ADA)";
+            adaContent.innerHTML = `
+                <a href="#" class="subject-button" data-ada="presentation">Présentation des cinq domaines de compétence ADA ainsi que leurs sous domaines</a>
+                <a href="#" class="subject-button" data-ada="application">Application des compétences</a>
+                <a href="#" class="subject-button" data-ada="reflexion">Réflexion sur les compétences ADA développées et les stratégies mises en oeuvre</a>
+                <div class="ada-display-content"></div>
+            `;
+        }
+        
+        const adaContentData = {
+            "presentation": `
+                <h3>Domaines et sous-domaines des ADA</h3>
+                <ul>
+                    <li><strong>Recherche :</strong>
+                        <ul>
+                            <li>Culture de l'information</li>
+                            <li>Culture des médias</li>
+                        </ul>
+                    </li>
+                    <li><strong>Dimension Sociale :</strong>
+                        <ul>
+                            <li>Collaboration</li>
+                        </ul>
+                    </li>
+                    <li><strong>Communication :</strong>
+                        <ul>
+                            <li>Communication</li>
+                        </ul>
+                    </li>
+                    <li><strong>Autogestion :</strong>
+                        <ul>
+                            <li>Organisation</li>
+                            <li>Compétences affectives</li>
+                            <li>Compétences de réflexion</li>
+                        </ul>
+                    </li>
+                    <li><strong>Pensée :</strong>
+                        <ul>
+                            <li>Pensée critique</li>
+                            <li>Pensée créative</li>
+                            <li>Transfert</li>
+                        </ul>
+                    </li>
+                </ul>
+            `,
+            "application": `
+                <p>Contenu sur l'application des compétences en classe et dans la vie quotidienne.</p>
+                <p>Ce contenu pourrait inclure des exemples de projets, des études de cas ou des activités pratiques.</p>
+            `,
+            "reflexion": `
+                <p>Contenu sur la réflexion des élèves sur leurs apprentissages et les stratégies qu'ils ont mises en œuvre.</p>
+                <p>Ce contenu pourrait inclure des grilles d'auto-évaluation ou des exemples de journaux de bord.</p>
+            `
+        };
+
+        // Événements pour l'icône Présentation (bureau et barre des tâches)
+        presentationIcon.addEventListener("click", function(event) {
+            event.preventDefault();
+            openModal(presentationModal);
+        });
+
+        taskbarPresentationIcon.addEventListener("click", function(event) {
+            event.preventDefault();
+            openModal(presentationModal);
+        });
+        
+        presentationCloseBtn.addEventListener("click", function() {
+            closeModal(presentationModal);
+        });
+
+        // Événements pour l'icône des ressources IB (bureau et barre des tâches)
+        ibIcon.addEventListener("click", function(event) {
+            event.preventDefault();
+            openModal(ibModal);
+        });
+
+        taskbarIbResourcesIcon.addEventListener("click", function(event) {
+            event.preventDefault();
+            openModal(ibModal);
+        });
+
+        ibCloseBtn.addEventListener("click", function() {
+            closeModal(ibModal);
+        });
+
+        // Événements pour l'icône des matières (bureau et barre des tâches)
+        matiereIcon.addEventListener("click", function(event) {
+            event.preventDefault();
+            document.getElementById("matiere-content-container").innerHTML = matiereListHTML;
+            openModal(matiereModal);
+        });
+
+        taskbarMatieresIcon.addEventListener("click", function(event) {
+            event.preventDefault();
+            document.getElementById("matiere-content-container").innerHTML = matiereListHTML;
+            openModal(matiereModal);
+        });
+
+        matiereCloseBtn.addEventListener("click", function() {
+            closeModal(matiereModal);
+        });
+        
+        // Événements de navigation à l'intérieur de la modale matières
+        document.getElementById("matiere-content-container").addEventListener("click", function(event) {
+            event.preventDefault();
+            const clickedElement = event.target;
+            
+            // Si l'utilisateur clique sur une matière, affiche les détails
+            if (clickedElement.dataset.matiere) {
+                matiereModal.querySelector("h2").textContent = clickedElement.dataset.matiere;
+                document.getElementById("matiere-content-container").innerHTML = matiereDetailsHTML;
+            }
+            // Si l'utilisateur clique sur le bouton "Retour"
+            else if (clickedElement.classList.contains("back-button")) {
+                matiereModal.querySelector("h2").textContent = "Matières";
+                document.getElementById("matiere-content-container").innerHTML = matiereListHTML;
+            }
+        });
+        
+        // Événements pour l'icône de l'interdisciplinarité (bureau et barre des tâches)
+        interdisIcon.addEventListener("click", function(event) {
+            event.preventDefault();
+            interdisTitle.textContent = "Interdisciplinarité";
+            interdisContent.innerHTML = `
+                <a href="#" class="subject-button" data-unit="Unité 1">Unité 1</a>
+                <a href="#" class="subject-button" data-unit="Unité 2">Unité 2</a>
+            `;
+            openModal(interdisModal);
+        });
+
+        taskbarInterdisIcon.addEventListener("click", function(event) {
+            event.preventDefault();
+            interdisTitle.textContent = "Interdisciplinarité";
+            interdisContent.innerHTML = `
+                <a href="#" class="subject-button" data-unit="Unité 1">Unité 1</a>
+                <a href="#" class="subject-button" data-unit="Unité 2">Unité 2</a>
+            `;
+            openModal(interdisModal);
+        });
+        
+        interdisCloseBtn.addEventListener("click", function() {
+            closeModal(interdisModal);
+        });
+        
+        // Événements de navigation à l'intérieur de la modale interdisciplinarité
+        interdisContent.addEventListener("click", function(event) {
+            if (event.target.classList.contains("subject-button")) {
+                event.preventDefault();
+                const unit = event.target.dataset.unit;
+                
+                // Si on clique sur une unité, on change le contenu
+                interdisTitle.textContent = unit;
+                interdisContent.innerHTML = `
+                    <a href="#" class="subject-button">Produit final</a>
+                    <a href="#" class="subject-button">Réflexion</a>
+                    <br>
+                    <a href="#" class="subject-button back-button">Retour</a>
+                `;
+            }
+            
+            // Gestion du bouton de retour
+            if (event.target.classList.contains("back-button")) {
+                event.preventDefault();
+                interdisTitle.textContent = "Interdisciplinarité";
+                interdisContent.innerHTML = `
+                    <a href="#" class="subject-button" data-unit="Unité 1">Unité 1</a>
+                    <a href="#" class="subject-button" data-unit="Unité 2">Unité 2</a>
+                `;
+            }
+        });
+
+        // Événements pour l'icône des ADA (bureau et barre des tâches)
+        adaIcon.addEventListener("click", function(event) {
+            event.preventDefault();
+            showAdaMainContent();
+            openModal(adaModal);
+        });
+
+        taskbarAdaIcon.addEventListener("click", function(event) {
+            event.preventDefault();
+            showAdaMainContent();
+            openModal(adaModal);
+        });
+
+        adaCloseBtn.addEventListener("click", function() {
+            closeModal(adaModal);
+        });
+        
+        // Événements de navigation à l'intérieur de la modale ADA
+        adaContent.addEventListener("click", function(event) {
+            const clickedElement = event.target;
+            const displayContent = document.querySelector(".ada-display-content");
+            
+            if (clickedElement.classList.contains("subject-button")) {
+                event.preventDefault();
+                const adaCategory = clickedElement.dataset.ada;
+                if (adaCategory && adaContentData[adaCategory]) {
+                    displayContent.innerHTML = adaContentData[adaCategory];
+                }
+            }
+        });
+
+        // Événements pour l'icône de Développement personnel (bureau et barre des tâches)
+        developpementPersonnelIcon.addEventListener("click", function(event) {
+            event.preventDefault();
+            openModal(developpementPersonnelModal);
+        });
+
+        taskbarDeveloppementPersonnelIcon.addEventListener("click", function(event) {
+            event.preventDefault();
+            openModal(developpementPersonnelModal);
+        });
+
+        developpementPersonnelCloseBtn.addEventListener("click", function() {
+            closeModal(developpementPersonnelModal);
+        });
+
+        // Événements pour l'icône de Politiques et règlements (bureau et barre des tâches)
+        politiquesReglementsIcon.addEventListener("click", function(event) {
+            event.preventDefault();
+            // Réinitialiser le contenu pour s'assurer que l'état de la modale est le bon
+            politiquesReglementsTitle.textContent = "Politiques et règlements";
+            politiquesReglementsContent.innerHTML = `
+                <a href="https://www.ibo.org/globalassets/new-structure/programmes/shared-resources/pdfs/academic-integrity-policy-fr.pdf" target="_blank" class="subject-button">Politique d'intégrité</a>
+                <a href="#" class="subject-button" data-reglement="Règlement">Règlement</a>
+                <a href="#" class="subject-button" data-reglement="Matrices">Matrices de l'enseignement des comportements</a>
+            `;
+            openModal(politiquesReglementsModal);
+        });
+
+        taskbarPolitiquesReglementsIcon.addEventListener("click", function(event) {
+            event.preventDefault();
+            // Réinitialiser le contenu pour s'assurer que l'état de la modale est le bon
+            politiquesReglementsTitle.textContent = "Politiques et règlements";
+            politiquesReglementsContent.innerHTML = `
+                <a href="https://www.ibo.org/globalassets/new-structure/programmes/shared-resources/pdfs/academic-integrity-policy-fr.pdf" target="_blank" class="subject-button">Politique d'intégrité</a>
+                <a href="#" class="subject-button" data-reglement="Règlement">Règlement</a>
+                <a href="#" class="subject-button" data-reglement="Matrices">Matrices de l'enseignement des comportements</a>
+            `;
+            openModal(politiquesReglementsModal);
+        });
+
+        politiquesReglementsCloseBtn.addEventListener("click", function() {
+            closeModal(politiquesReglementsModal);
+        });
+
+        // Événements de navigation à l'intérieur de la modale Politiques et règlements
+        politiquesReglementsContent.addEventListener("click", function(event) {
+            const clickedElement = event.target;
+            if (clickedElement.classList.contains("subject-button")) {
+                const reglementCategory = clickedElement.dataset.reglement;
+                if (reglementCategory === "Règlement") {
+                    event.preventDefault();
+                    politiquesReglementsTitle.textContent = "Règlement";
+                    politiquesReglementsContent.innerHTML = reglementContent;
+                } else if (reglementCategory === "Matrices") {
+                    event.preventDefault();
+                    closeModal(politiquesReglementsModal);
+                    openModal(matricesComportementModal);
+                }
+            }
+            
+            // Gestion du bouton de retour
+            if (clickedElement.classList.contains("back-button")) {
+                event.preventDefault();
+                politiquesReglementsTitle.textContent = "Politiques et règlements";
+                politiquesReglementsContent.innerHTML = `
+                    <a href="https://www.ibo.org/globalassets/new-structure/programmes/shared-resources/pdfs/academic-integrity-policy-fr.pdf" target="_blank" class="subject-button">Politique d'intégrité</a>
+                    <a href="#" class="subject-button" data-reglement="Règlement">Règlement</a>
+                    <a href="#" class="subject-button" data-reglement="Matrices">Matrices de l'enseignement des comportements</a>
+                `;
+            }
+        });
+        
+        // Fermeture de la nouvelle modale des matrices
+        matricesComportementCloseBtn.addEventListener("click", function() {
+            closeModal(matricesComportementModal);
+        });
+
+        // Fermeture des modales en cliquant à l'extérieur
+        window.addEventListener("click", function(event) {
+            if (event.target == presentationModal) {
+                closeModal(presentationModal);
+            }
+            if (event.target == ibModal) {
+                closeModal(ibModal);
+            }
+            if (event.target == matiereModal) {
+                closeModal(matiereModal);
+            }
+            if (event.target == interdisModal) {
+                closeModal(interdisModal);
+            }
+            if (event.target == adaModal) {
+                closeModal(adaModal);
+            }
+            if (event.target == developpementPersonnelModal) {
+                closeModal(developpementPersonnelModal);
+            }
+            if (event.target == politiquesReglementsModal) {
+                closeModal(politiquesReglementsModal);
+            }
+            if (event.target == matricesComportementModal) {
+                closeModal(matricesComportementModal);
+            }
+        });
+    </script>
+</body>
+</html>
