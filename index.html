@@ -63,14 +63,13 @@
             top: 20px;
             left: 20px;
             display: flex;
-            flex-direction: column;
-            gap: 15px;
+            gap: 30px; /* Espace entre les deux colonnes d'icônes */
         }
 
         .desktop-icons-group {
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 15px; /* Espace entre les icônes dans une colonne */
             align-items: flex-start;
         }
 
@@ -138,13 +137,14 @@
             font-weight: bold;
             font-size: 13px;
             text-shadow: 1px 1px #163661;
+            text-decoration: none; /* Pour le lien */
         }
 
         #start-button:hover {
             background: linear-gradient(to right, #5d9ee3, #4a7fd6, #3d79cf);
         }
 
-        .xp-logo {
+        #start-button .xp-logo {
             width: 18px;
             height: 18px;
             margin-right: 4px;
@@ -286,16 +286,20 @@
             flex-grow: 1;
         }
 
+        /* Contrôles de fenêtre (Seulement le bouton Fermer) */
+        .title-bar-controls {
+            display: flex;
+            align-items: center;
+        }
+
         .title-bar-controls button {
-            background: #e3e3e3;
+            background: url('https://www.clker.com//cliparts/5/e/d/8/1225770321258316602emyller_close_button.svg.hi.png') no-repeat center center;
+            background-size: 100% 100%; /* S'assurer que l'image remplit le bouton */
             border: 1px solid #163661;
-            color: black;
-            width: 16px;
-            height: 16px;
+            width: 20px; /* Taille légèrement ajustée pour la nouvelle icône */
+            height: 20px; /* Taille légèrement ajustée pour la nouvelle icône */
             padding: 0;
             margin-left: 2px;
-            font-size: 10px;
-            line-height: 10px;
             cursor: pointer;
             box-shadow: 1px 1px 0 rgba(255, 255, 255, 0.7) inset, -1px -1px 0 rgba(0, 0, 0, 0.5) inset;
         }
@@ -452,19 +456,13 @@
             </div>
             
             <div class="desktop-icons-group">
-                <a href="#" onclick="openWindow('settings-window')" class="desktop-icon">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Windows_Settings_icon.svg/2184px-Windows_Settings_icon.svg.png" alt="Settings">
-                    <span>Paramètres</span>
-                </a>
-            </div>
+                </div>
         </div>
 
         <div id="settings-window" class="window hidden">
             <div class="title-bar">
                 <div class="title-bar-text">Paramètres d'affichage</div>
                 <div class="title-bar-controls">
-                    <button aria-label="Minimize" onclick="minimizeWindow('settings-window')"></button>
-                    <button aria-label="Maximize" onclick="maximizeWindow('settings-window')"></button>
                     <button aria-label="Close" onclick="closeWindow('settings-window')"></button>
                 </div>
             </div>
@@ -479,8 +477,6 @@
             <div class="title-bar">
                 <div class="title-bar-text">Présentation</div>
                 <div class="title-bar-controls">
-                    <button aria-label="Minimize" onclick="minimizeWindow('presentation-window')"></button>
-                    <button aria-label="Maximize" onclick="maximizeWindow('presentation-window')"></button>
                     <button aria-label="Close" onclick="closeWindow('presentation-window')"></button>
                 </div>
             </div>
@@ -493,8 +489,6 @@
             <div class="title-bar">
                 <div class="title-bar-text">Matrices des comportements</div>
                 <div class="title-bar-controls">
-                    <button aria-label="Minimize" onclick="minimizeWindow('matrices-comportement-window')"></button>
-                    <button aria-label="Maximize" onclick="maximizeWindow('matrices-comportement-window')"></button>
                     <button aria-label="Close" onclick="closeWindow('matrices-comportement-window')"></button>
                 </div>
             </div>
@@ -507,8 +501,6 @@
             <div class="title-bar">
                 <div class="title-bar-text">Ressources IB transversales</div>
                 <div class="title-bar-controls">
-                    <button aria-label="Minimize" onclick="minimizeWindow('ib-resources-window')"></button>
-                    <button aria-label="Maximize" onclick="maximizeWindow('ib-resources-window')"></button>
                     <button aria-label="Close" onclick="closeWindow('ib-resources-window')"></button>
                 </div>
             </div>
@@ -546,8 +538,6 @@
             <div class="title-bar">
                 <div class="title-bar-text">Matières</div>
                 <div class="title-bar-controls">
-                    <button aria-label="Minimize" onclick="minimizeWindow('matieres-window')"></button>
-                    <button aria-label="Maximize" onclick="maximizeWindow('matieres-window')"></button>
                     <button aria-label="Close" onclick="closeWindow('matieres-window')"></button>
                 </div>
             </div>
@@ -562,8 +552,6 @@
             <div class="title-bar">
                 <div class="title-bar-text">Interdisciplinarité</div>
                 <div class="title-bar-controls">
-                    <button aria-label="Minimize" onclick="minimizeWindow('interdisciplinarite-window')"></button>
-                    <button aria-label="Maximize" onclick="maximizeWindow('interdisciplinarite-window')"></button>
                     <button aria-label="Close" onclick="closeWindow('interdisciplinarite-window')"></button>
                 </div>
             </div>
@@ -578,8 +566,6 @@
             <div class="title-bar">
                 <div class="title-bar-text">Approches de l'apprentissage (ADA)</div>
                 <div class="title-bar-controls">
-                    <button aria-label="Minimize" onclick="minimizeWindow('ada-window')"></button>
-                    <button aria-label="Maximize" onclick="maximizeWindow('ada-window')"></button>
                     <button aria-label="Close" onclick="closeWindow('ada-window')"></button>
                 </div>
             </div>
@@ -594,8 +580,6 @@
             <div class="title-bar">
                 <div class="title-bar-text">Développement personnel</div>
                 <div class="title-bar-controls">
-                    <button aria-label="Minimize" onclick="minimizeWindow('developpement-personnel-window')"></button>
-                    <button aria-label="Maximize" onclick="maximizeWindow('developpement-personnel-window')"></button>
                     <button aria-label="Close" onclick="closeWindow('developpement-personnel-window')"></button>
                 </div>
             </div>
@@ -611,8 +595,6 @@
             <div class="title-bar">
                 <div class="title-bar-text">Politiques et règlements</div>
                 <div class="title-bar-controls">
-                    <button aria-label="Minimize" onclick="minimizeWindow('politiques-reglements-window')"></button>
-                    <button aria-label="Maximize" onclick="maximizeWindow('politiques-reglements-window')"></button>
                     <button aria-label="Close" onclick="closeWindow('politiques-reglements-window')"></button>
                 </div>
             </div>
@@ -623,20 +605,20 @@
             </div>
         </div>
 
-    </div> <footer id="taskbar">
-        <div id="start-button">
-            <a href="https://almadina.ma" style="display: flex; text-decoration: none; color: white;">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/e/e4/Windows_XP_logo.svg" alt="XP Logo" class="xp-logo">
-                <span>démarrer</span>
-            </a>
-        </div>
+    </div> 
+    
+    <footer id="taskbar">
+        <a id="start-button" href="https://almadina.ma" target="_blank">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLCVT8-N5jNjDRVRZyl4LnXvb6w4QiajtIFw&s" alt="Madina Logo" class="xp-logo">
+            <span>Site Madina Schools</span>
+        </a>
         
         <div id="taskbar-windows">
             </div>
 
         <div id="notification-area">
             <button id="settings-icon" class="taskbar-icon" onclick="openWindow('settings-window')">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Windows_Settings_icon.svg/32px-Windows_Settings_icon.svg.png" alt="Settings Icon">
+                <img src="https://www.rw-designer.com/icon-image/18835-256x256x8.png" alt="Settings Icon">
             </button>
             <div id="time">7:06 PM</div>
         </div>
@@ -724,8 +706,8 @@
             <a href="#" class="subject-button" data-matiere="Histoire-Géographie">Histoire-Géographie</a>
             <a href="#" class="subject-button" data-matiere="Design">Design</a>
             <a href="#" class="subject-button" data-matiere="Service communautaire">Service communautaire</a>
-            <a href="#" class="subject-button" data-matiere="Éducation artistique">Éducation artistique</a>
-            <a href="#" class="subject-button" data-matiere="Théâtre">Théâtre</a>
+            <a href="#" class="subject-button">Éducation artistique</a>
+            <a href="#" class="subject-button">Théâtre</a>
             <a href="#" class="subject-button">Professeur Principal</a>
             <a href="#" class="subject-button">Arts plastiques</a>
         `;
@@ -843,9 +825,9 @@
             }
         }
         
+        // La fonction maximizeWindow est désormais vide, car le bouton n'existe plus
         function maximizeWindow(windowId) {
-            // Fonctionnalité non implémentée mais nécessaire pour les boutons
-            console.log(`Fenêtre ${windowId} maximisée (non implémenté)`);
+            console.log(`Fenêtre ${windowId} maximisée (bouton retiré, fonction non implémentée)`);
         }
 
         function focusWindow(windowId) {
@@ -868,7 +850,8 @@
                 if (!titleBar) return;
 
                 titleBar.addEventListener('mousedown', (e) => {
-                    if (e.target.closest('.title-bar-controls')) return;
+                    // Vérifier si le clic est sur un bouton de contrôle de fenêtre (la croix)
+                    if (e.target.closest('.title-bar-controls button')) return;
                     
                     isDragging = true;
                     dragWin = win;
@@ -953,7 +936,7 @@
         }
 
         function showInterdisMainContent() {
-            const interdisContent = document.getElementById("interdis-content");
+            const interdisContent = document.getElementById("interdisciplinarite-content");
             interdisContent.innerHTML = `
                 <a href="#" class="subject-button" data-unit="Unité 1">Unité 1</a>
                 <a href="#" class="subject-button" data-unit="Unité 2">Unité 2</a>
@@ -1032,7 +1015,6 @@
                     politiquesReglementsTitle.textContent = "Règlement";
                     politiquesReglementsContent.innerHTML = reglementContent;
                 } else if (reglementCategory === "Matrices") {
-                    // Ouvre la fenêtre des matrices et ferme la fenêtre actuelle
                     closeWindow('politiques-reglements-window');
                     openWindow('matrices-comportement-window');
                 } else if (clickedElement.classList.contains("back-button")) {
