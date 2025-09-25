@@ -6,9 +6,8 @@
     <title>Mon E-Portfolio - Windows XP Edition</title>
     
     <style>
-        /*
-         * Windows XP Theme CSS
-         * Basé sur le style "Luna" (Bleu) et Tahoma
+        /* * Windows XP Theme CSS
+         * Basé sur le style "Luna" (Bleu) et Tahoma 
          */
 
         /* ---------------------------------------------------- */
@@ -143,11 +142,13 @@
         #start-button:hover {
             background: linear-gradient(to right, #5d9ee3, #4a7fd6, #3d79cf);
         }
-
-        #start-button .xp-logo {
+        
+        /* FIX: Cible l'image (img) directement pour la redimensionner */
+        #start-button img { 
             width: 18px;
             height: 18px;
             margin-right: 4px;
+            /* Retire le style .xp-logo incorrect */
         }
 
         #taskbar-windows {
@@ -294,10 +295,10 @@
 
         .title-bar-controls button {
             background: url('https://www.clker.com//cliparts/5/e/d/8/1225770321258316602emyller_close_button.svg.hi.png') no-repeat center center;
-            background-size: 100% 100%; /* S'assurer que l'image remplit le bouton */
+            background-size: 100% 100%;
             border: 1px solid #163661;
-            width: 20px; /* Taille légèrement ajustée pour la nouvelle icône */
-            height: 20px; /* Taille légèrement ajustée pour la nouvelle icône */
+            width: 20px;
+            height: 20px;
             padding: 0;
             margin-left: 2px;
             cursor: pointer;
@@ -312,11 +313,12 @@
             box-shadow: -1px -1px 0 rgba(255, 255, 255, 0.7) inset, 1px 1px 0 rgba(0, 0, 0, 0.5) inset;
         }
 
+        /* FIX: Le window-body doit toujours avoir un scroll visible pour le contenu long */
         .window-body {
             padding: 10px;
             background-color: var(--xp-light-grey);
             flex-grow: 1;
-            overflow-y: auto;
+            overflow-y: scroll; /* Garantit que la barre de défilement est toujours disponible pour le contenu long */
         }
 
         /* ---------------------------------------------------- */
@@ -371,8 +373,8 @@
             text-align: right;
             font-family: Tahoma, sans-serif;
         }
-
-        /* Styles pour la section ADA */
+        
+        /* Styles pour la section ADA et Interdisciplinarité (contenu par défaut) */
         .ada-display-content {
             margin-top: 10px;
             padding: 10px;
@@ -380,6 +382,7 @@
             background-color: white;
             border-radius: 0;
             font-size: 11px;
+            color: black;
         }
 
         /* ---------------------------------------------------- */
@@ -455,8 +458,6 @@
                 </a>
             </div>
             
-            <div class="desktop-icons-group">
-                </div>
         </div>
 
         <div id="settings-window" class="window hidden">
@@ -609,7 +610,7 @@
     
     <footer id="taskbar">
         <a id="start-button" href="https://almadina.ma" target="_blank">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLCVT8-N5jNjDRVRZyl4LnXvb6w4QiajtIFw&s" alt="Madina Logo" class="xp-logo">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLCVT8-N5jNjDRVRZyl4LnXvb6w4QiajtIFw&s" alt="Madina Logo">
             <span>Site Madina Schools</span>
         </a>
         
@@ -628,7 +629,7 @@
         const desktop = document.getElementById('desktop');
         const taskbarWindows = document.getElementById('taskbar-windows');
 
-        // Liste des URLs pour les fonds d'écran (Demandées par l'utilisateur)
+        // Liste des URLs pour les fonds d'écran 
         const wallpaperUrls = [
             'https://external-preview.redd.it/r6g38aXSaQWtd1KxwJbQ-Fs5jtSVDxX3wtLHJEdqixw.jpg?auto=webp&s=fdee18de73d4f642ccc323470e044ed0f1bae7ea',
             'https://images3.alphacoders.com/135/1354129.jpeg',
@@ -643,32 +644,147 @@
         let offset = { x: 0, y: 0 };
 
         // ----------------------------------------------------
-        // Contenu Spécifique (Repris de votre JS)
+        // Contenu Spécifique (Maintenant complet)
         // ----------------------------------------------------
 
+        // CONTENU COMPLET DU CODE DE VIE (RÈGLEMENT)
         const reglementContent = `
             <div class="arabic-text">
                 <p>• أنا لا أضيع أدواتي المدرسية، وأحرص على إحضارها باستمرار، لأنها مكون رئيس من مكونات تعليمي.</p>
-                <p>• كي أكون منظما و أمينا ، أعيد التجهيزات التي استعملتها إلى مكانها أو إلى حالتها الأولى حتى أستفيد منها مرة أخرى</p>
+                <p>• أتحمل عواقب خروجي من المؤسسة بين الثانية عشرة والواحدة</p>
+                <p>• ألتزم بالدخول إلى الفصل قبل الوقت المحدد حتى لا أزعج زملائي وأساتذتي وأستفيد من الدرس كاملا.</p>
+                <p>• أتحمل مسؤولية عقابي إذا قمت بسلوك أو تصرف غير لائق.</p>
+                <p>• أنجز واجباتي المنزلية وأحضرها في الوقت المحدد، لأن هذا يدخل ضمن مهامي الأساسية.</p>
+                <p>• ألتزم بتبرير أي غياب أو تأخير للإدارة.</p>
+                <p>• أشارك بفعالية في الأنشطة المدرسية غير الصفية حتى أحقق الأهداف السامية للتعلم.</p>
+                <p>• أحافظ على نظافة قسمي وفضاءات المؤسسة بشكل عام، لأن هذا يدخل ضمن مسؤوليتي كتلميذ مسؤول عن ذاته ومحيط تعلمه.</p>
+                <p>• لا أستعمل الهاتف النقال و الأجهزة الإلكترونية داخل المدرسة ما بين الثامنة و الرابعة زوالا كي أتجنب التورط في مشاكل.</p>
+                <br>
+                <p>• أهتم بهندامي ونظافة جسدي، تكريما لنفسي وإظهارا لنعمة الله علي.</p>
+                <p>• على أحرص أن يكون لباسي محتشما ولائقا ،إرضاء لخالقي واحتراما لنفسي.</p>
+                <p>• على أحرص أن لا تتعدى علاقتي مع الجنس الآخر حدود الشرع لكي أنال رضى الله و أسعد في حياتي.</p>
+                <p>• أعترف بأخطائي بلباقة ،لأجنب نفسي العناد والاصطدام والكذب.</p>
+                <p>• أتقبل ذاتي ومظهري،لأنعم بصحة نفسية جيدة وحياة سعيدة.</p>
+                <p>• أنسجم مع المبادئ المتعارف عليها ومعتقداتي،لأشعر بالرضى والسعادة وأبني صورة إيجابية عن ذاتي.</p>
+                <p>• أحترم الوقت وأقدر قيمته،لأنتفع به ولا أفوت على نفسي الفرص الثمينة .</p>
+                <p>• أحافظ على عباداتي وأتحلى بالقيم الحميدة، وأشكر الله، لأنه استأمنني على ذاتي وسخر الكون لخدمتي.</p>
+                <p>• أحرص على أن يكون كلامي مهذبا وراقيا، لأن كلامي مرآة تعكس احترامي لذاتي.</p>
+                <p>• أنتظر دوري بأدب عند اقتناء وجبة الغذاء،لأجنب نفسي الأذى وأمرنها على السلوكات الحضارية في شتى المواقف.</p>
+                <p>• أحتفظ بهدوئي وحلمي،لأجنب نفسي العصبية والغضب.</p>
+                <p>• أتجنب الغش وأثق في قدراتي لأحقق أهدافي وأصل إلى غاياتي.</p>
+                <p>• أحافظ على سلامة ذاتي، لأنها ملك لله استأمنني عليها فلا يجب أن أخون الأمانة.</p>
+                <p>• أقدر عملي وأتوخى الإحسان فيه لأحقق ذاتي وأسعدها.</p>
+                <p>• أعود نفسي على التعلم الدائم، لأن المعرفة لا حدود لها.</p>
+                <p>• أحرص على أن أكون متفائلا مقبلا على الحياة لأكون سعيدا معطاء وخدوما.</p>
+                <br>
+                <p>• لكي يحترم رأي أحترم رأي الآخر</p>
+                <p>• لاكتساب محبة الآخرين و تقديرهم أتجنب كل المشاجرات و الخصومات و أعتذر عند الخطأ</p>
+                <p>• لاستمرار العلاقات الجيدة و انعدام الخلافات أفسح المجال للآخرين للاعتذار</p>
+                <p>• لكي أستفيد من الشرح و أدرس في جو يسوده الانضباط و الاحترام أحترم قانون القسم</p>
+                <p>• لكسب ثقة و وقار الأستاذ أحترمه و أقدر مادته و أنجز ما طلب مني</p>
+                <p>• لحصول التفاهم مع الآخرين أتكلم بصوت منخفض و أتحاور بالتي هي أحسن</p>
+                <p>• لنيل مودة الآخرين أتكلم باحترام معهم و لا أستهين بهم و أقدر مجهوداتهم</p>
+                <p>• لتجنب التورط في المشاكل أتجنب أخذ صور الآخرين دون إذن منهم</p>
+                <p>• لنيل رضى الله ثم الناس أساعد الآخرين على الصلح فيما بينهم</p>
+                <br>
+                <p>في علاقتي بالمسجد :</p>
+                <ul>
+                    <li>لكوني مؤمن صالح محب لله و رسوله ، ألتزم بآداب المسجد تقديسا لبيت الله تعالى.</li>
+                    <li>لأن النظافة من الإيمان ،فأنا أعتني بنظافة جسدي و ملابسي و خاصة جواربي حتى لا أزعج المصلين و أنال رضا الله تعالى.</li>
+                    <li>لأني مؤمن محب للجمال و النظام ، أضع حذائي في المكان المخصص له قبل الدخول إلى المسجد حتى أتجنب عرقلة المصلين و تشويه مدخله.</li>
+                    <li>لأنني محب للنظام ،أعيد ممتلكات المسجد من قرآن كريم و عبايات و سجاد و كتب إلى مكانها بعد الاستعمال حتى أستفيد منها مرة أخرى و يستفيد منها غيري.</li>
+                    <li>لأنال الأجر و التواب الجزيل ، أعود نفسي على الاهتمام بزينة المسجد و مرافقه.</li>
+                </ul>
+                <br>
+                <p>في علاقتي بالقسم :</p>
+                <ul>
+                    <li>كي أدرس في فضاء نقي و صحي ،أحافظ على نظافتي و نظافة قسمي بتجنب رمي الأوراق و النجارة و الطباشير.</li>
+                    <li>كي أدرس في فضاء نظيف و صحي ، أتجنب الخربشة على الطاولات و السبورة و الجدران ،و إلصاق العلكة تحت الكراسي ، و تكسير حوامل المعاطف.</li>
+                    <li>كي لا أكون أنانيا ، أتجنب إزالة الإخباريات و الوثائق الإدارية من سبورة الإعلام حتى يستفيد و يطلع عليها كل التلاميذ.</li>
+                    <li>كي أدرس في أجواء ملائمة ، أتجنب تكسير النوافذ و الكراسي و الطاولات ،و تقطيع الستائر.</li>
+                    <li>كي أكون أمينا و مؤدبا ، أحترم ممتلكات زملائي، و لا أستعملها إلا بإذن منهم .</li>
+                    <li>كي أكون تلميذا نموذجيا مؤثرا ، أساهم في تزيين قسمي و المحافظة على جماله.</li>
+                </ul>
+                <br>
+                <p>في علاقتي بالمكتبة :</p>
+                <ul>
+                    <li>كي أستفيد أكثر و أتجنب إزعاج زملائي ، ألتزم بآداب المكتبة و قانونها الداخلي .</li>
+                    <li>كي أدرس في فضاء صحي و نقي ، أحافظ على نظافة المكتبة برمي النفايات في مكانها المخصص ، وتجنب تناول الطعام فيها.</li>
+                    <li>كي يستفيد زملائي من مقتنيات و تجهيزات المكتبة و أتجنب الأنانية ، أعيد الكتب التي اقتنيتها في الآجال المحددة دون تمزيقها أو إتلافها.</li>
+                </ul>
+                <br>
+                <p>في علاقتي بالساحة و الممرات و المناطق الخضراء</p>
+                <ul>
+                    <li>كي أعيش في بيئة نظيفة و صحية ، أتجنب رمي الأزبال و نفايات طعامي في الساحة و الممرات و المناطق الخضراء .</li>
+                    <li>كي أكون من أصدقاء البيئة ،أتجنب قطع الورود و الأزهار ، و الكتابة على الجدران .</li>
+                    <li>كي أحافظ على سلامتي و سلامة غيري ، لا أركض في الممرات و الساحة ، أو ألعب الكرة فيها.</li>
+                </ul>
+                <br>
+                <p>في علاقتي بالمطعم</p>
+                <ul>
+                    <li>كي أحافظ على النظام و لا أكون أنانيا ، أحترم دوري في الصف ، و أتجنب الفوضى و التسابق مع الآخرين.</li>
+                    <li>كي أحافظ على البيئة و أتجنب إزعاج المساعدات ، أتناول وجباتي في المكان المخصص لذلك ، و أرمي البقايا في القمامية ، و أعيد الأواني إلى مكانها المخصص.</li>
+                    <li>كي أحافظ على سلامة صحتي ،أشتري من المطعم ما يكفيني من الأغذية الصحية دون تبذير أو إسراف.</li>
+                </ul>
+                <br>
+                <p>في علاقتي بالملاعب و قاعة السينما و المسرح</p>
+                <ul>
+                    <li>كي أحافظ على مبدإ السلامة ، لا أستعمل هذه الفضاءات إلا في الأوقات المحددة لي، أو بعد إذن أحد المسؤولين ( الإدارة – أستاذ الرياضة – أستاذ المسرح ...).</li>
+                    <li>كي أمارس هواياتي في جو صحي و نظيف ، أحافظ على نظافة هذه الفضاءات و أدعو نفسي و زملائي إلى تجنب إلحاق أي ضرر بها.</li>
+                </ul>
+                <br>
+                <p>في علاقتي بالصنابير و المراحيض :</p>
+                <ul>
+                    <li>كي لا أكون مبذرا، أتجنب تضييع الورق الصحي و الصابون و الماء .</li>
+                    <li>كي أحافظ على النظافة ، أتأكد من تنظيف المرحاض بعد قضاء الحاجة</li>
+                </ul>
+                <br>
+                <p>في علاقتي بتجهيزات المختبر و قاعة الإعلاميات :</p>
+                <ul>
+                    <li>كي أستفيد و يستفيد غيري ، أستعمل التجهيزات المخبرية و المعلوماتية بحرص و تركيز حتى لا ألحق الضرر بها. </li>
+                    <li>كي أكون منظما و أمينا ، أعيد التجهيزات التي استعملتها إلى مكانها أو إلى حالتها الأولى حتى أستفيد منها مرة أخرى</li>
+                </ul>
                 <br>
                 <p>في مدارس المدينة، نؤمن أن السلوك القويم ضروري لضمان الظروف الملائمة للحياة الجماعية</p>
                 <p>في مدارس المدينة نشجع على الالتزام بقانون الحياة ولا نقبل الإخلال به</p>
                 <br>
                 <h3>المساعــــدات</h3>
+                <p>إلى جانب النتائج السلبية، سأقبل واحدة أو أكثر من التدابير التي تساعدني على تقويم سلوكي:</p>
                 <ul>
                     <li>ألتقي بالأستاذ الرئيسي لإيجاد حلول لتقويم سلوكي</li>
+                    <li>أقوم بأعمال إضافية تساعدني على فهم وتقويم تصرفاتي ( بحوث- عروض- تقارير..)</li>
+                    <li>أقوم بتوقيع تعهد أوالتزام بعدم تكرار تصرفاتي السلبية</li>
+                    <li>ألتقي بالمستشار في التوجيه أو أخصائي لتقويم السلوك( طبيب نفساني)</li>
                     <li>أقوم بإعداد رسالة اعتذار.</li>
                 </ul>
                 <br>
                 <h3>العواقب السلبيــــــة</h3>
+                <p>إذا لم أحترم الضوابط الضرورية لقانون الحياة، سأقبل واحدة أو أكثر من العقوبات التالية:</p>
                 <ul>
                     <li>أخجل من نفسي وأكون بحالة نفسية سيئة</li>
+                    <li>أساتذتي ووالدي غير فخورين بي</li>
+                    <li>أحجز نصف ساعة خلال فترة الاستراحة الزوالية داخل مكان للتفكير</li>
+                    <li>أحجز مدة محددة داخل قاعة المداومة لإنجاز الواجبات والتمارين.</li>
+                    <li>يستدعى أو يخبر أولياء أمري مع ما يترتب عن ذلك من نتائج</li>
+                    <li>أحرم من الخرجات البيداغوجية والترفيهية ومن الأنشطة الموازية</li>
+                    <li>أقوم بتعويض الأضرار اللاحقة بالأدوات والأجهزة الناجمة عن سلوكي وتصرفاتي</li>
+                    <li>أحرم من ولوج المؤسسة وأظل بمنزلي مدة معينة لكي أفكر مليا في سلوكي</li>
+                    <li>أتوصل بإنذار شفوي أو كتابي</li>
+                    <li>أقوم بأعمال داخل المؤسسة ( ترتيب وتنظيف أماكن تناول الوجبات- تنظيف وترتيب الأقسام ..)</li>
+                    <li>أتحمل قرارات مجلس الانضباط</li>
+                    <li>أقبل تدخل أي طرف من الفاعلين في العملية التربوية (أساتذة، أعوان، إداريون، حراس، مساعدات...) وفي حالة رفضي الانصياع لهم واحترام تدخلهم أتعرض لعقوبات زجرية.</li>
                     <li>تحتفظ المؤسسة بحقها الكامل في اتخاذ العقوبات الزجرية الملائمة لتقويم سلوكي وتصرفاتي...</li>
                 </ul>
                 <br>
                 <h3>الحوافــــــز</h3>
+                <p>إذا احترمت القواعد المتعلق بقانون الحياة، بإمكاني أن أستحق واحدة أو أكثر من النتائج والحوافز الإيجابية الآتية:</p>
                 <ul>
                     <li>أنا فخور بنفسي أكون سعيدا</li>
+                    <li>أساتذتي ووالدي فخورون بي</li>
+                    <li>أتلقى عبارات التهاني والتشجيع</li>
+                    <li>أكون سعيدا لأنني أكدت بأفعالي وسلوكي أن قانون الحياة مهم بالنسبة لي</li>
+                    <li>أحصل على شهادة استحقاق أو شهادة تقديرية خصوصا في المناسبات الخاصة ( فسحة الاثنين مثلا)</li>
+                    <li>أحصل على ميزة خاصة تدون في نتائجي وفي مذكرتي السنوية</li>
                     <li>أستفيد من خرجة خاصة تنظمها المؤسسة</li>
                 </ul>
                 <br>
@@ -685,13 +801,41 @@
                             <td>أول مرة : إندار شفوي<br>ثاني مرة: حجر من 12س إلى 12س 30د</td>
                         </tr>
                         <tr>
+                            <td>عدم إنجاز الواجبات</td>
+                            <td>أول مرة: مراسلة كتابية للآباء<br>ثاني مرة: مراسلة ثانية<br>ثالث مرة: استدعاء الآباء<br>رابع مرة : حرمان التلميذ من جميع الخرجات و الأنشطة الترفيهية<br>في الحالات القصوى : إمضاء التزام بمغادرة المؤسسة<br>مع تدوين الحالات في دفتر القسم</td>
+                        </tr>
+                        <tr>
+                            <td>الثرثرة</td>
+                            <td>- إنذار شفوي<br>- إنذار كتابي<br>- خصم من نقطة السلوك<br>- إخراج التلميذ من القسم مع إخبار الآباء<br>- حجز لمدة ساعتين</td>
+                        </tr>
+                        <tr>
+                            <td>عدم إحضار اللوازم المدرسية</td>
+                            <td>- إنذار شفوي<br>- إنذار كتابي<br>- إخراج التلميذ و إلزامه بإنجاز تمارين معينة في قاعة المداولة مع إخبار الآباء</td>
+                        </tr>
+                        <tr>
+                            <td>عدم إحضار اللوازم المدرسية ( آلة حاسبة، قلم، مسطرة...) أثناء الامتحان</td>
+                            <td>يمنع منعا كليا على التلاميذ استعارة تلك اللوازم حتى يتسنى لهم اجتياز الامتحان في أحسن الظروف</td>
+                        </tr>
+                        <tr>
+                            <td>عدم احترام الزملاء داخل الفصل</td>
+                            <td>- النصح مع إنذار شفوي<br>- إنذار كتابي<br>- خصم من نقطة السلوك<br>- الحرمان من الخرجات و الأنشطة الترفيهية<br>- الحجز لمدة ساعة أو ساعتين<br>- أن يرتب و ينظف التلميذ المعاقب طاولة زميله المتضرر من سلوكه المشين<br>ملاحظة : فيما يخص هذه النقطة تبقى الصلاحية للأست استاذ لتطبيق العقوبة المناسبة حسب طبيعة السلوك</td>
+                        </tr>
+                        <tr>
+                            <td>عدم احترام الأستاذ</td>
+                            <td>- مجلس تأديبي</td>
+                        </tr>
+                        <tr>
+                            <td>الهندام الغير اللائق</td>
+                            <td>- لا يقبل التلاميذ الذين يرتدون هنداما غير لائق ، سواء الإناث أو الذكور.<br>- تلتزم الإناث بارتداء الوزرة.</td>
+                        </tr>
+                        <tr>
                             <td>الغش</td>
-                            <td>- إذا كان التلميذ قد شرع في الغش، يحصل على صفر مع إخبار الآباء</td>
+                            <td>- إذا كان التلميذ قد شرع في الغش, يحصل على صفر مع إخبار الآباء</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-            <a href="#" class="subject-button back-button" style="text-align: center;">Retour</a>
+            <a href="#" class="subject-button back-to-list" style="text-align: center;">Retour</a>
         `;
 
         const matiereListHTML = `
@@ -723,6 +867,7 @@
         const adaContentData = {
             "presentation": `
                 <h3>Domaines et sous-domaines des ADA</h3>
+                <p>Les approches de l'apprentissage (ADA) sont les compétences transversales que les élèves développent et appliquent dans tous les domaines d'étude.</p>
                 <ul>
                     <li><strong>Recherche :</strong><ul><li>Culture de l'information</li><li>Culture des médias</li></ul></li>
                     <li><strong>Dimension Sociale :</strong><ul><li>Collaboration</li></ul></li>
@@ -731,8 +876,8 @@
                     <li><strong>Pensée :</strong><ul><li>Pensée critique</li><li>Pensée créative</li><li>Transfert</li></ul></li>
                 </ul>
             `,
-            "application": `<p>Contenu sur l'application des compétences en classe et dans la vie quotidienne. Ce contenu pourrait inclure des exemples de projets, des études de cas ou des activités pratiques.</p>`,
-            "reflexion": `<p>Contenu sur la réflexion des élèves sur leurs apprentissages et les stratégies qu'ils ont mises en œuvre. Ce contenu pourrait inclure des grilles d'auto-évaluation ou des exemples de journaux de bord.</p>`
+            "application": `<p>Contenu sur l'application des compétences en classe et dans la vie quotidienne. Ce contenu pourrait inclure des exemples de projets, des études de cas ou des activités pratiques. **À compléter avec vos exemples spécifiques.**</p>`,
+            "reflexion": `<p>Contenu sur la réflexion des élèves sur leurs apprentissages et les stratégies qu'ils ont mises en œuvre. Ce contenu pourrait inclure des grilles d'auto-évaluation ou des exemples de journaux de bord. **À compléter avec vos grilles et journaux.**</p>`
         };
 
         // ----------------------------------------------------
@@ -770,7 +915,6 @@
             const win = document.getElementById(windowId);
             const taskbarButtonId = 'task-' + windowId.replace('-window', '');
             
-            // Créer le bouton dans la barre des tâches s'il n'existe pas
             if (!document.getElementById(taskbarButtonId)) {
                 const titleText = win.querySelector('.title-bar-text').textContent;
                 const button = document.createElement('button');
@@ -789,14 +933,12 @@
             const win = document.getElementById(windowId);
             win.classList.add('hidden');
             
-            // Supprimer le bouton de la barre des tâches
             const taskbarButtonId = 'task-' + windowId.replace('-window', '');
             const taskbarButton = document.getElementById(taskbarButtonId);
             if (taskbarButton) {
                 taskbarButton.remove();
             }
             
-            // Trouver la prochaine fenêtre à activer (si elle existe)
             const nextWin = document.querySelector('.window:not(.hidden):not(.minimized)');
             if (nextWin) {
                 focusWindow(nextWin.id);
@@ -816,20 +958,13 @@
         function toggleWindow(windowId) {
             const win = document.getElementById(windowId);
             if (win.classList.contains('hidden') || win.classList.contains('minimized')) {
-                // Est caché/minimisé, on restaure/ouvre
                 win.classList.remove('hidden', 'minimized');
                 focusWindow(windowId);
             } else {
-                // Est ouvert, on minimise
                 minimizeWindow(windowId);
             }
         }
         
-        // La fonction maximizeWindow est désormais vide, car le bouton n'existe plus
-        function maximizeWindow(windowId) {
-            console.log(`Fenêtre ${windowId} maximisée (bouton retiré, fonction non implémentée)`);
-        }
-
         function focusWindow(windowId) {
             document.querySelectorAll('.window').forEach(w => w.classList.remove('active'));
             document.querySelectorAll('.taskbar-button').forEach(b => b.classList.remove('active'));
@@ -850,7 +985,6 @@
                 if (!titleBar) return;
 
                 titleBar.addEventListener('mousedown', (e) => {
-                    // Vérifier si le clic est sur un bouton de contrôle de fenêtre (la croix)
                     if (e.target.closest('.title-bar-controls button')) return;
                     
                     isDragging = true;
@@ -905,14 +1039,12 @@
                 container.appendChild(thumb);
             });
 
-            // Sélectionner la vignette initiale
             selectWallpaper(wallpaperUrls[0], document.querySelector(`.wallpaper-thumb[data-url='${wallpaperUrls[0]}']`));
         }
 
         function selectWallpaper(url, element) {
             desktop.style.backgroundImage = `url('${url}')`;
 
-            // Mettre à jour la classe 'selected'
             document.querySelectorAll('.wallpaper-thumb').forEach(thumb => {
                 thumb.classList.remove('selected');
             });
@@ -922,7 +1054,7 @@
         }
 
         // ----------------------------------------------------
-        // 4. Gestion du Contenu Dynamique
+        // 4. Gestion du Contenu Dynamique 
         // ----------------------------------------------------
 
         function showAdaMainContent() {
@@ -931,12 +1063,14 @@
                 <a href="#" class="subject-button" data-ada="presentation">Présentation des cinq domaines de compétence ADA ainsi que leurs sous domaines</a>
                 <a href="#" class="subject-button" data-ada="application">Application des compétences</a>
                 <a href="#" class="subject-button" data-ada="reflexion">Réflexion sur les compétences ADA développées et les stratégies mises en oeuvre</a>
-                <div class="ada-display-content"></div>
+                <div class="ada-display-content">Cliquez sur l'un des boutons ci-dessus pour afficher le contenu détaillé.</div>
             `;
         }
 
         function showInterdisMainContent() {
-            const interdisContent = document.getElementById("interdisciplinarite-content");
+            const interdisTitle = document.getElementById("interdis-title");
+            const interdisContent = document.getElementById("interdis-content");
+            interdisTitle.textContent = "Interdisciplinarité";
             interdisContent.innerHTML = `
                 <a href="#" class="subject-button" data-unit="Unité 1">Unité 1</a>
                 <a href="#" class="subject-button" data-unit="Unité 2">Unité 2</a>
@@ -981,15 +1115,41 @@
                 const interdisTitle = document.getElementById("interdis-title");
                 const interdisContent = document.getElementById("interdis-content");
 
+                // 1. Clic sur Unité 1 ou Unité 2
                 if (clickedElement.dataset.unit) {
                     interdisTitle.textContent = clickedElement.dataset.unit;
                     interdisContent.innerHTML = `
-                        <a href="#" class="subject-button">Produit final</a>
-                        <a href="#" class="subject-button">Réflexion</a>
+                        <a href="#" class="subject-button" data-action="produit">Produit final</a>
+                        <a href="#" class="subject-button" data-action="reflexion">Réflexion</a>
                         <br>
-                        <a href="#" class="subject-button back-button">Retour</a>
+                        <a href="#" class="subject-button back-to-list">Retour aux unités</a>
                     `;
-                } else if (clickedElement.classList.contains("back-button")) {
+                } 
+                // 2. Clic sur Produit final ou Réflexion (affiche un contenu par défaut)
+                else if (clickedElement.dataset.action === "produit" || clickedElement.dataset.action === "reflexion") {
+                    const actionText = clickedElement.textContent;
+                    interdisContent.innerHTML = `
+                        <h3>${actionText} - ${interdisTitle.textContent}</h3>
+                        <div class="ada-display-content">
+                            Le contenu pour cette section sera inséré ici (par exemple, un lien vers le document, un PDF, ou un texte de réflexion).
+                            <p>Merci de remplacer ce texte par votre contenu réel.</p>
+                        </div>
+                        <a href="#" class="subject-button back-to-options">Retour aux options de l'unité</a>
+                    `;
+                } 
+                // 3. Retour aux options de l'unité (depuis Produit/Réflexion)
+                else if (clickedElement.classList.contains("back-to-options")) {
+                    const currentUnitTitle = interdisTitle.textContent;
+                    interdisContent.innerHTML = `
+                        <a href="#" class="subject-button" data-action="produit">Produit final</a>
+                        <a href="#" class="subject-button" data-action="reflexion">Réflexion</a>
+                        <br>
+                        <a href="#" class="subject-button back-to-list">Retour aux unités</a>
+                    `;
+                    interdisTitle.textContent = currentUnitTitle; // Conserver le titre de l'unité
+                }
+                // 4. Retour aux unités (depuis le menu d'une unité)
+                else if (clickedElement.classList.contains("back-to-list")) {
                     interdisTitle.textContent = "Interdisciplinarité";
                     showInterdisMainContent();
                 }
@@ -1017,7 +1177,7 @@
                 } else if (reglementCategory === "Matrices") {
                     closeWindow('politiques-reglements-window');
                     openWindow('matrices-comportement-window');
-                } else if (clickedElement.classList.contains("back-button")) {
+                } else if (clickedElement.classList.contains("back-to-list")) {
                     politiquesReglementsTitle.textContent = "Politiques et règlements";
                     showPolitiquesReglementsMainContent();
                 }
