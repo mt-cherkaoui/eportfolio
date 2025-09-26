@@ -49,7 +49,7 @@
             width: 100vw;
             height: calc(100vh - 28px); /* Laisse de la place pour la barre des tâches */
             /* Fond d'écran initial demandé */
-            background-image: url('https://external-preview.redd.it/r6g38aXSaQWtd1KxwJbQ-Fs5jtSVDxX3wtLHJEdqixw.jpg?auto=webp&s=fdee18de73d4f642ccc323470e044ed0f1bae7ea');
+            background-image: url('https://external-preview.redd.it/r6g38aXSaQWtd1KxwTjQ-Fs5jtSVDxX3wtLHJEdqixw.jpg?auto=webp&s=fdee18de73d4f642ccc323470e044ed0f1bae7ea');
             background-size: cover;
             background-repeat: no-repeat;
             background-position: center;
@@ -148,7 +148,6 @@
             width: 18px;
             height: 18px;
             margin-right: 4px;
-            /* Retire le style .xp-logo incorrect */
         }
 
         #taskbar-windows {
@@ -425,34 +424,34 @@
         
         <div class="desktop-icons-container">
             <div class="desktop-icons-group">
-                <a href="#" onclick="openWindow('presentation-window')" id="presentation-icon" class="desktop-icon">
+                <a href="#" onclick="openWindow('presentation-window'); return false;" id="presentation-icon" class="desktop-icon">
                     <img src="https://i.imgur.com/MB6dKKu.jpeg" alt="Moi">
                     <span>Présentation</span>
                 </a>
-                <a href="#" onclick="openWindow('ib-resources-window')" id="ib-resources-icon" class="desktop-icon">
+                <a href="#" onclick="openWindow('ib-resources-window'); return false;" id="ib-resources-icon" class="desktop-icon">
                     <img src="https://www.sek.es/wp-content/uploads/colegio-del-mundo-IB.jpg" alt="Ressources IB transversales">
                     <span>Ressources IB</span>
                 </a>
-                <a href="#" onclick="openWindow('matieres-window')" id="matières-icon" class="desktop-icon">
+                <a href="#" onclick="openWindow('matieres-window'); return false;" id="matières-icon" class="desktop-icon">
                     <img src="https://static.vecteezy.com/ti/vecteur-libre/p1/1736348-ensemble-objets-et-fournitures-scolaires-vectoriel.jpg" alt="Matières">
                     <span>Matières</span>
                 </a>
-                <a href="#" onclick="openWindow('interdisciplinarite-window')" id="interdisciplinarité-icon" class="desktop-icon">
+                <a href="#" onclick="openWindow('interdisciplinarite-window'); return false;" id="interdisciplinarité-icon" class="desktop-icon">
                     <img src="https://lejournal.cnrs.fr/sites/default/files/styles/lightbox-hd/public/assets/images/fotolia_84475014_72dpi.jpg?itok=bTerM_re" alt="Interdisciplinarité">
                     <span>Interdisciplinarité</span>
                 </a>
-                <a href="#" onclick="openWindow('ada-window')" id="ada-icon" class="desktop-icon">
+                <a href="#" onclick="openWindow('ada-window'); return false;" id="ada-icon" class="desktop-icon">
                     <img src="https://andrepiolat.csf.bc.ca/wp-content/uploads/sites/5/images/cerclePEI.jpg" alt="Approches de l'apprentissage">
                     <span>Approches de l'apprentissage (ADA)</span>
                 </a>
             </div>
 
             <div class="desktop-icons-group">
-                <a href="#" onclick="openWindow('developpement-personnel-window')" id="developpement-personnel-icon" class="desktop-icon">
+                <a href="#" onclick="openWindow('developpement-personnel-window'); return false;" id="developpement-personnel-icon" class="desktop-icon">
                     <img src="https://cityzen-mineraux.fr/-_-/res/191371ed-efcf-4f38-bf28-da05f0d803f9/images/files/191371ed-efcf-4f38-bf28-da05f0d803f9/0ea7d308-01ce-4c5f-9674-19bffa309317/1024-1024/b79417cfa987687d0044778ae703d4f1861e5d8a" alt="Développement personnel">
                     <span>Développement personnel</span>
                 </a>
-                <a href="#" onclick="openWindow('politiques-reglements-window')" id="politiques-reglements-icon" class="desktop-icon">
+                <a href="#" onclick="openWindow('politiques-reglements-window'); return false;" id="politiques-reglements-icon" class="desktop-icon">
                     <img src="https://www.univ-lyon2.fr/medias/photo/illus-reglement_1598966170063-jpg" alt="Politiques et règlements">
                     <span>Politiques et règlements</span>
                 </a>
@@ -587,7 +586,7 @@
             <div class="window-body">
                 <h2 style="text-align: center;">Développement personnel</h2>
                 <div class="modal-text">
-                    <p>On nous a pas encore dit quoi écrire ici</p>
+                    <p>Rien tout simplement</p>
                 </div>
             </div>
         </div>
@@ -618,7 +617,7 @@
             </div>
 
         <div id="notification-area">
-            <button id="settings-icon" class="taskbar-icon" onclick="openWindow('settings-window')">
+            <button id="settings-icon" class="taskbar-icon" onclick="openWindow('settings-window'); return false;">
                 <img src="https://www.rw-designer.com/icon-image/18835-256x256x8.png" alt="Settings Icon">
             </button>
             <div id="time">7:06 PM</div>
@@ -777,7 +776,7 @@
                 </ul>
                 <br>
                 <h3>الحوافــــــز</h3>
-                <p>إذا احترمت القواعد المتعلق بقانون الحياة، بإمكاني أن أستحق واحدة أو أكثر من النتائج والحوافز الإيجابية الآتية:</p>
+                <p>إذا احترمت القواعد المتعلق بقانون الحياة، بإمpossibilité que je puisse mériter une ou plusieurs des conséquences et incitations positives suivantes:</p>
                 <ul>
                     <li>أنا فخور بنفسي أكون سعيدا</li>
                     <li>أساتذتي ووالدي فخورون بي</li>
@@ -876,8 +875,12 @@
                     <li><strong>Pensée :</strong><ul><li>Pensée critique</li><li>Pensée créative</li><li>Transfert</li></ul></li>
                 </ul>
             `,
-            "application": `<p>Contenu sur l'application des compétences en classe et dans la vie quotidienne. Ce contenu pourrait inclure des exemples de projets, des études de cas ou des activités pratiques. **À compléter avec vos exemples spécifiques.**</p>`,
-            "reflexion": `<p>Contenu sur la réflexion des élèves sur leurs apprentissages et les stratégies qu'ils ont mises en œuvre. Ce contenu pourrait inclure des grilles d'auto-évaluation ou des exemples de journaux de bord. **À compléter avec vos grilles et journaux.**</p>`
+            "application": `<p>Contenu sur l'application des compétences en classe et dans la vie quotidienne. Ce contenu pourrait inclure des exemples de projets, des études de cas ou des activités pratiques. **À compléter avec vos exemples spécifiques.**</p>
+                <a href="#" class="subject-button back-to-options" data-ada="accueil">Retour au menu ADA</a>
+            `,
+            "reflexion": `<p>Contenu sur la réflexion des élèves sur leurs apprentissages et les stratégies qu'ils ont mises en œuvre. Ce contenu pourrait inclure des grilles d'auto-évaluation ou des exemples de journaux de bord. **À compléter avec vos grilles et journaux.**</p>
+                <a href="#" class="subject-button back-to-options" data-ada="accueil">Retour au menu ADA</a>
+            `
         };
 
         // ----------------------------------------------------
@@ -914,6 +917,21 @@
         function openWindow(windowId) {
             const win = document.getElementById(windowId);
             const taskbarButtonId = 'task-' + windowId.replace('-window', '');
+            
+            // CORRECTION 2: Réinitialisation du contenu dynamique lors de l'ouverture
+            if (windowId === 'politiques-reglements-window') {
+                showPolitiquesReglementsMainContent();
+            } else if (windowId === 'matieres-window') {
+                // Réinitialiser le titre et le contenu de la fenêtre Matières
+                document.getElementById("matiere-title").textContent = "Matières";
+                document.getElementById("matiere-content-container").innerHTML = matiereListHTML;
+            } else if (windowId === 'interdisciplinarite-window') {
+                // Réinitialiser le contenu de la fenêtre Interdisciplinarité
+                showInterdisMainContent();
+            } else if (windowId === 'ada-window') {
+                // Réinitialiser le contenu de la fenêtre ADA
+                showAdaMainContent();
+            }
             
             if (!document.getElementById(taskbarButtonId)) {
                 const titleText = win.querySelector('.title-bar-text').textContent;
@@ -1079,6 +1097,11 @@
 
         function showPolitiquesReglementsMainContent() {
             const politiquesReglementsContent = document.getElementById("politiques-reglements-content");
+            const politiquesReglementsTitle = document.getElementById("politiques-reglements-title");
+            
+            // On s'assure que le titre est bien le titre principal lors du reset
+            politiquesReglementsTitle.textContent = "Politiques et règlements";
+            
             politiquesReglementsContent.innerHTML = `
                 <a href="https://www.ibo.org/globalassets/new-structure/programmes/shared-resources/pdfs/academic-integrity-policy-fr.pdf" target="_blank" class="subject-button">Politique d'intégrité</a>
                 <a href="#" class="subject-button" data-reglement="Règlement">Règlement</a>
@@ -1094,7 +1117,15 @@
             const currentWindow = clickedElement.closest('.window');
             if (!currentWindow) return;
 
-            event.preventDefault();
+            // --- CORRECTION DU BUG "Politique d'intégrité" ---
+            // Si le bouton est un lien externe (target="_blank"), on ne bloque PAS son action par défaut.
+            if (clickedElement.getAttribute('target') === '_blank') {
+                return; // Laisse le navigateur ouvrir le lien externe
+            }
+            
+            event.preventDefault(); // Bloque l'action par défaut (href="#") pour les navigations internes
+            // --- FIN DE LA CORRECTION ---
+
 
             // Gestion de la fenêtre Matières
             if (currentWindow.id === 'matieres-window') {
@@ -1106,7 +1137,7 @@
                     matiereContentContainer.innerHTML = matiereDetailsHTML;
                 } else if (clickedElement.classList.contains("back-button")) {
                     matiereTitle.textContent = "Matières";
-                    matiereContentContainer.innerHTML = matiereListHTML;
+                    matiereContentContainer.innerHTML = matiereListHTML;ecfnecdnofcjesf
                 }
             }
             
@@ -1135,7 +1166,7 @@
                             <p>Merci de remplacer ce texte par votre contenu réel.</p>
                         </div>
                         <a href="#" class="subject-button back-to-options">Retour aux options de l'unité</a>
-                    `;
+                    `ezfergsdvttgrf;
                 } 
                 // 3. Retour aux options de l'unité (depuis Produit/Réflexion)
                 else if (clickedElement.classList.contains("back-to-options")) {
@@ -1150,7 +1181,6 @@
                 }
                 // 4. Retour aux unités (depuis le menu d'une unité)
                 else if (clickedElement.classList.contains("back-to-list")) {
-                    interdisTitle.textContent = "Interdisciplinarité";
                     showInterdisMainContent();
                 }
             }
@@ -1160,7 +1190,9 @@
                 const adaCategory = clickedElement.dataset.ada;
                 const displayContent = currentWindow.querySelector(".ada-display-content");
                 
-                if (adaCategory && adaContentData[adaCategory]) {
+                if (adaCategory === "accueil") {
+                    showAdaMainContent();
+                } else if (adaCategory && adaContentData[adaCategory]) {
                     displayContent.innerHTML = adaContentData[adaCategory];
                 }
             }
@@ -1178,7 +1210,6 @@
                     closeWindow('politiques-reglements-window');
                     openWindow('matrices-comportement-window');
                 } else if (clickedElement.classList.contains("back-to-list")) {
-                    politiquesReglementsTitle.textContent = "Politiques et règlements";
                     showPolitiquesReglementsMainContent();
                 }
             }
