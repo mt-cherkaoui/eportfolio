@@ -497,6 +497,29 @@
             </div>
         </div>
 
+        <div id="hg-historique-window" class="window hidden large-image-window">
+            <div class="title-bar">
+                <div class="title-bar-text arabic-text">HG-مكون التاريخ</div>
+                <div class="title-bar-controls">
+                    <button aria-label="Close" onclick="closeWindow('hg-historique-window')"></button>
+                </div>
+            </div>
+            <div class="window-body window-image-content">
+                <img src="https://i.imgur.com/86Zmc98.png" alt="Contenu Historique">
+            </div>
+        </div>
+
+        <div id="hg-geographie-window" class="window hidden large-image-window">
+            <div class="title-bar">
+                <div class="title-bar-text arabic-text">HG-مكون الجغرافيا</div>
+                <div class="title-bar-controls">
+                    <button aria-label="Close" onclick="closeWindow('hg-geographie-window')"></button>
+                </div>
+            </div>
+            <div class="window-body window-image-content">
+                <img src="https://i.imgur.com/VJY7aST.png" alt="Contenu Géographie">
+            </div>
+        </div>
         <div id="ib-resources-window" class="window hidden">
             <div class="title-bar">
                 <div class="title-bar-text">Ressources IB transversales</div>
@@ -586,7 +609,7 @@
             <div class="window-body">
                 <h2 style="text-align: center;">Développement personnel</h2>
                 <div class="modal-text">
-                    <p>Rien tout simplement</p>
+                    <p>Je ne sais pas encore quoi mettre ici uwu ^^</p>
                 </div>
             </div>
         </div>
@@ -649,7 +672,7 @@
         // CONTENU COMPLET DU CODE DE VIE (RÈGLEMENT)
         const reglementContent = `
             <div class="arabic-text">
-                <p>• أنا لا أضيع أدواتي المدرسية، وأحرص على إحضارها باستمرار، لأنها مكون رئيس من مكونات تعليمي.</p>
+                &bull;  <p>• أنا لا أضيع أدواتي المدرسية، وأحرص على إحضارها باستمرار، لأنها مكون رئيس من مكونات تعليمي.</p>
                 <p>• أتحمل عواقب خروجي من المؤسسة بين الثانية عشرة والواحدة</p>
                 <p>• ألتزم بالدخول إلى الفصل قبل الوقت المحدد حتى لا أزعج زملائي وأساتذتي وأستفيد من الدرس كاملا.</p>
                 <p>• أتحمل مسؤولية عقابي إذا قمت بسلوك أو تصرف غير لائق.</p>
@@ -776,60 +799,7 @@
                 </ul>
                 <br>
                 <h3>الحوافــــــز</h3>
-                <p>إذا احترمت القواعد المتعلق بقانون الحياة، بإمpossibilité que je puisse mériter une ou plusieurs des conséquences et incitations positives suivantes:</p>
-                <ul>
-                    <li>أنا فخور بنفسي أكون سعيدا</li>
-                    <li>أساتذتي ووالدي فخورون بي</li>
-                    <li>أتلقى عبارات التهاني والتشجيع</li>
-                    <li>أكون سعيدا لأنني أكدت بأفعالي وسلوكي أن قانون الحياة مهم بالنسبة لي</li>
-                    <li>أحصل على شهادة استحقاق أو شهادة تقديرية خصوصا في المناسبات الخاصة ( فسحة الاثنين مثلا)</li>
-                    <li>أحصل على ميزة خاصة تدون في نتائجي وفي مذكرتي السنوية</li>
-                    <li>أستفيد من خرجة خاصة تنظمها المؤسسة</li>
-                </ul>
-                <br>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>السلوك</th>
-                            <th>العقوبة</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>العلكة</td>
-                            <td>أول مرة : إندار شفوي<br>ثاني مرة: حجر من 12س إلى 12س 30د</td>
-                        </tr>
-                        <tr>
-                            <td>عدم إنجاز الواجبات</td>
-                            <td>أول مرة: مراسلة كتابية للآباء<br>ثاني مرة: مراسلة ثانية<br>ثالث مرة: استدعاء الآباء<br>رابع مرة : حرمان التلميذ من جميع الخرجات و الأنشطة الترفيهية<br>في الحالات القصوى : إمضاء التزام بمغادرة المؤسسة<br>مع تدوين الحالات في دفتر القسم</td>
-                        </tr>
-                        <tr>
-                            <td>الثرثرة</td>
-                            <td>- إنذار شفوي<br>- إنذار كتابي<br>- خصم من نقطة السلوك<br>- إخراج التلميذ من القسم مع إخبار الآباء<br>- حجز لمدة ساعتين</td>
-                        </tr>
-                        <tr>
-                            <td>عدم إحضار اللوازم المدرسية</td>
-                            <td>- إنذار شفوي<br>- إنذار كتابي<br>- إخراج التلميذ و إلزامه بإنجاز تمارين معينة في قاعة المداولة مع إخبار الآباء</td>
-                        </tr>
-                        <tr>
-                            <td>عدم إحضار اللوازم المدرسية ( آلة حاسبة، قلم، مسطرة...) أثناء الامتحان</td>
-                            <td>يمنع منعا كليا على التلاميذ استعارة تلك اللوازم حتى يتسنى لهم اجتياز الامتحان في أحسن الظروف</td>
-                        </tr>
-                        <tr>
-                            <td>عدم احترام الزملاء داخل الفصل</td>
-                            <td>- النصح مع إنذار شفوي<br>- إنذار كتابي<br>- خصم من نقطة السلوك<br>- الحرمان من الخرجات و الأنشطة الترفيهية<br>- الحجز لمدة ساعة أو ساعتين<br>- أن يرتب و ينظف التلميذ المعاقب طاولة زميله المتضرر من سلوكه المشين<br>ملاحظة : فيما يخص هذه النقطة تبقى الصلاحية للأست استاذ لتطبيق العقوبة المناسبة حسب طبيعة السلوك</td>
-                        </tr>
-                        <tr>
-                            <td>عدم احترام الأستاذ</td>
-                            <td>- مجلس تأديبي</td>
-                        </tr>
-                        <tr>
-                            <td>الهندام الغير اللائق</td>
-                            <td>- لا يقبل التلاميذ الذين يرتدون هنداما غير لائق ، سواء الإناث أو الذكور.<br>- تلتزم الإناث بارتداء الوزرة.</td>
-                        </tr>
-                        <tr>
-                            <td>الغش</td>
-                            <td>- إذا كان التلميذ قد شرع في الغش, يحصل على صفر مع إخبار الآباء</td>
+                <p>إذا احترمت القواعد المتعلق بقانون الحياة، بإم
                         </tr>
                     </tbody>
                 </table>
@@ -860,9 +830,29 @@
             <a href="#" class="subject-button" data-action="criteres">Les critères d'évaluation</a>
             <a href="#" class="subject-button" data-action="concepts">Les concepts étudiés</a>
             <a href="#" class="subject-button" data-action="reflexions">Les réflexions des élèves sur les apprentissages et la compréhension conceptuelle, ainsi que les axes de progrès identifiés suite à chaque unité</a>
-            <a href="#" class="subject-button back-button">Retour aux matières</a>
+            <a href="#" class="subject-button back-to-list">Retour aux matières</a>
         `;
         
+        // Nouvelle structure de contenu pour les détails spécifiques des matières
+        const matiereSpecificContent = {
+            "Histoire-Géographie": {
+                "concepts": `
+                    <p>Concepts étudiés en Histoire-Géographie (HG):</p>
+                    <a href="#" class="subject-button arabic-text" data-sub-action="historique">HG-مكون التاريخ</a> 
+                    <a href="#" class="subject-button arabic-text" data-sub-action="geographie">HG-مكون الجغرافيا</a> 
+                    <br>
+                    <a href="#" class="subject-button back-to-options" data-matiere-detail="details">Retour aux détails de la matière</a>
+                `,
+                // Le contenu "historique" et "geographie" sont gérés par l'ouverture d'une nouvelle fenêtre
+                "historique": `<p class="arabic-text">Le contenu Histoire est affiché dans une fenêtre séparée.</p><a href="#" class="subject-button back-to-concepts">Retour aux concepts HG</a>`,
+                "geographie": `<p class="arabic-text">Le contenu Géographie est affiché dans une fenêtre séparée.</p><a href="#" class="subject-button back-to-concepts">Retour aux concepts HG</a>`,
+                // Contenu par défaut pour les autres sections (Objectifs, Critères, Réflexions)
+                "default": (action) => `<p>Contenu par défaut pour **${action}** en Histoire-Géographie.</p><a href="#" class="subject-button back-to-options" data-matiere-detail="details">Retour aux détails de la matière</a>`
+            },
+            // Ajoutez d'autres matières ici si elles ont un contenu spécifique
+            "default": (matiere, action) => `<p>Contenu par défaut pour **${action}** dans la matière **${matiere}**.</p><a href="#" class="subject-button back-to-options" data-matiere-detail="details">Retour aux détails de la matière</a>`
+        };
+
         const adaContentData = {
             "presentation": `
                 <h3>Domaines et sous-domaines des ADA</h3>
@@ -1108,6 +1098,24 @@
                 <a href="#" class="subject-button" data-reglement="Matrices">Matrices de l'enseignement des comportements</a>
             `;
         }
+        
+        // Fonction pour afficher le contenu de détail d'une matière (Objectifs, Critères, etc.)
+        function showMatiereDetailContent(matiere, action) {
+            const matiereContentContainer = document.getElementById("matiere-content-container");
+            const specificData = matiereSpecificContent[matiere];
+            
+            if (specificData && specificData[action]) {
+                // Contenu spécifique (ex: concepts HG)
+                matiereContentContainer.innerHTML = specificData[action];
+            } else if (specificData && specificData["default"]) {
+                // Contenu par défaut pour la matière si l'action est listée dans 'default'
+                matiereContentContainer.innerHTML = specificData["default"](action);
+            } else {
+                // Contenu générique par défaut pour toutes les autres matières/actions
+                matiereContentContainer.innerHTML = matiereSpecificContent["default"](matiere, action);
+            }
+        }
+
 
         // Événements (Utilisation de la délégation pour les fenêtres)
         document.addEventListener('click', (event) => {
@@ -1117,27 +1125,68 @@
             const currentWindow = clickedElement.closest('.window');
             if (!currentWindow) return;
 
-            // --- CORRECTION DU BUG "Politique d'intégrité" ---
             // Si le bouton est un lien externe (target="_blank"), on ne bloque PAS son action par défaut.
             if (clickedElement.getAttribute('target') === '_blank') {
-                return; // Laisse le navigateur ouvrir le lien externe
+                return; 
             }
             
             event.preventDefault(); // Bloque l'action par défaut (href="#") pour les navigations internes
-            // --- FIN DE LA CORRECTION ---
 
 
             // Gestion de la fenêtre Matières
             if (currentWindow.id === 'matieres-window') {
                 const matiereTitle = document.getElementById("matiere-title");
                 const matiereContentContainer = document.getElementById("matiere-content-container");
+                const currentMatiere = matiereTitle.textContent;
 
+                // 1. Clic sur une matière dans la liste principale
                 if (clickedElement.dataset.matiere) {
                     matiereTitle.textContent = clickedElement.dataset.matiere;
                     matiereContentContainer.innerHTML = matiereDetailsHTML;
-                } else if (clickedElement.classList.contains("back-button")) {
+                } 
+                // 2. Clic sur "Retour aux matières"
+                else if (clickedElement.classList.contains("back-to-list")) {
                     matiereTitle.textContent = "Matières";
-                    matiereContentContainer.innerHTML = matiereListHTML;ecfnecdnofcjesf
+                    matiereContentContainer.innerHTML = matiereListHTML;
+                }
+                // 3. Clic sur Objectifs, Critères, Concepts, Réflexions (data-action)
+                else if (clickedElement.dataset.action) {
+                    showMatiereDetailContent(currentMatiere, clickedElement.dataset.action);
+                }
+                // 4. Clic sur un sous-détail (ex: Histoire ou Géographie) (data-sub-action)
+                else if (clickedElement.dataset.subAction) {
+                    const subAction = clickedElement.dataset.subAction;
+                    
+                    if (subAction === "historique") {
+                        // Action spéciale: Ferme la fenêtre matières et ouvre la fenêtre image HISTORIQUE.
+                        closeWindow('matieres-window');
+                        openWindow('hg-historique-window');
+                        return; // Arrête le reste du traitement pour éviter les conflits
+                    }
+                    
+                    if (subAction === "geographie") {
+                        // Action spéciale: Ferme la fenêtre matières et ouvre la fenêtre image GÉOGRAPHIE.
+                        closeWindow('matieres-window');
+                        openWindow('hg-geographie-window');
+                        return; // Arrête le reste du traitement pour éviter les conflits
+                    }
+
+                    // Pour les autres sous-actions (non définies), on affiche le contenu normal
+                    const content = matiereSpecificContent[currentMatiere] && matiereSpecificContent[currentMatiere][subAction] 
+                                    ? matiereSpecificContent[currentMatiere][subAction] 
+                                    : `<p>Contenu détaillé pour **${subAction}**.</p><a href="#" class="subject-button back-to-concepts">Retour aux concepts HG</a>`;
+                    matiereContentContainer.innerHTML = content;
+                }
+                // 5. Clic sur "Retour aux concepts HG" (depuis Histoire/Géographie)
+                else if (clickedElement.classList.contains("back-to-concepts")) {
+                    // On retourne au menu des concepts de HG
+                    if (matiereSpecificContent[currentMatiere] && matiereSpecificContent[currentMatiere]["concepts"]) {
+                        matiereContentContainer.innerHTML = matiereSpecificContent[currentMatiere]["concepts"];
+                    }
+                }
+                // 6. Clic sur "Retour aux détails de la matière" (depuis Objectifs, Critères, Concepts génériques)
+                else if (clickedElement.classList.contains("back-to-options") && clickedElement.dataset.matiereDetail === "details") {
+                    matiereContentContainer.innerHTML = matiereDetailsHTML;
                 }
             }
             
@@ -1166,7 +1215,7 @@
                             <p>Merci de remplacer ce texte par votre contenu réel.</p>
                         </div>
                         <a href="#" class="subject-button back-to-options">Retour aux options de l'unité</a>
-                    `ezfergsdvttgrf;
+                    `;
                 } 
                 // 3. Retour aux options de l'unité (depuis Produit/Réflexion)
                 else if (clickedElement.classList.contains("back-to-options")) {
@@ -1193,6 +1242,8 @@
                 if (adaCategory === "accueil") {
                     showAdaMainContent();
                 } else if (adaCategory && adaContentData[adaCategory]) {
+                    // Les données du contenu ADA contiennent déjà le bouton de retour, 
+                    // on peut simplement remplacer l'intégralité du contenu dynamique.
                     displayContent.innerHTML = adaContentData[adaCategory];
                 }
             }
