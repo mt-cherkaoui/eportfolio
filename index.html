@@ -6,39 +6,416 @@
     <title>Mon E-Portfolio - Windows XP Edition</title>
     
     <style>
-        /* ... (CSS non modifié, sauf ajout des styles pour le nouveau groupe d'icônes) ... */
-        
+        /* * Windows XP Theme CSS
+         * Basé sur le style "Luna" (Bleu) et Tahoma 
+         */
+
+        /* ---------------------------------------------------- */
+        /* 1. Général & Police (Tahoma) */
+        /* ---------------------------------------------------- */
+        :root {
+            --xp-blue: #245195;
+            --xp-light-blue: #3e81e3;
+            --xp-lightest-blue: #70aee4;
+            --xp-green: #387b38;
+            --xp-light-grey: #f0f0f0;
+            --xp-dark-grey: #ccc;
+            --xp-border-color: #0a246a;
+            --xp-window-bg: #fff;
+            --xp-taskbar-color: #245195;
+        }
+
+        * {
+            box-sizing: border-box;
+            /* Police demandée: Tahoma */
+            font-family: Tahoma, sans-serif;
+            font-size: 11px;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden; /* Empêche le défilement du bureau */
+            background-color: #3a6ea5; /* Couleur de secours */
+        }
+
         /* ---------------------------------------------------- */
         /* 2. Le Bureau et Fond d'écran */
         /* ---------------------------------------------------- */
-        /* ... (Styles existants) ... */
-        
+        #desktop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: calc(100vh - 28px); /* Laisse de la place pour la barre des tâches */
+            /* Fond d'écran initial demandé */
+            background-image: url('https://external-preview.redd.it/r6g38aXSaQWtd1KxwTjQ-Fs5jtSVDxX3wtLHJEdqixw.jpg?auto=webp&s=fdee18de73d4f642ccc323470e044ed0f1bae7ea');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            transition: background-image 0.5s ease;
+        }
+
+        /* Styles pour les icônes du bureau */
         .desktop-icons-container {
             position: absolute;
             top: 20px;
             left: 20px;
-            width: calc(100vw - 40px); /* Ajout de la largeur pour positionner à droite */
             display: flex;
-            justify-content: space-between; /* Permet de pousser les groupes aux extrémités */
-            gap: 30px; 
+            gap: 30px; /* Espace entre les deux colonnes d'icônes */
         }
 
         .desktop-icons-group {
             display: flex;
             flex-direction: column;
-            gap: 15px; 
+            gap: 15px; /* Espace entre les icônes dans une colonne */
             align-items: flex-start;
         }
 
-        .desktop-icons-group.right-group {
-            /* S'aligne à droite de l'écran */
-            align-items: flex-end; 
-            margin-left: auto; /* Pousse ce groupe à l'extrême droite */
+        .desktop-icon {
+            width: 70px;
+            text-align: center;
+            cursor: pointer;
+            padding: 5px;
+            border: 1px solid transparent;
+            text-decoration: none;
+            color: white;
+            text-shadow: 1px 1px #000;
         }
 
-        /* ... (Le reste des styles des icônes) ... */
+        .desktop-icon:hover {
+            background-color: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
 
-        /* ... (Le reste du code CSS) ... */
+        .desktop-icon img {
+            width: 32px;
+            height: 32px;
+            display: block;
+            margin: 0 auto 5px;
+            border: none;
+            object-fit: cover;
+        }
+
+        .desktop-icon span {
+            font-size: 10px;
+            word-wrap: break-word;
+            color: inherit;
+            text-shadow: 1px 1px #000;
+        }
+
+        /* ---------------------------------------------------- */
+        /* 3. La Barre des Tâches (Footer) */
+        /* ---------------------------------------------------- */
+        #taskbar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 28px;
+            background: var(--xp-taskbar-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-top: 1px solid var(--xp-lightest-blue);
+            padding: 0 4px;
+            z-index: 1000;
+        }
+
+        #start-button {
+            background: linear-gradient(to right, #4086b9, #3660a9, #2365a6);
+            border: 1px solid #163661;
+            border-radius: 4px;
+            padding: 2px 6px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+            margin-right: 6px;
+            color: white;
+            font-weight: bold;
+            font-size: 13px;
+            text-shadow: 1px 1px #163661;
+            text-decoration: none; /* Pour le lien */
+        }
+
+        #start-button:hover {
+            background: linear-gradient(to right, #5d9ee3, #4a7fd6, #3d79cf);
+        }
+        
+        /* FIX: Cible l'image (img) directement pour la redimensionner */
+        #start-button img { 
+            width: 18px;
+            height: 18px;
+            margin-right: 4px;
+        }
+
+        #taskbar-windows {
+            display: flex;
+            flex-grow: 1;
+            height: 100%;
+            padding: 0 4px;
+            overflow: hidden;
+        }
+
+        .taskbar-button {
+            background: linear-gradient(to bottom, #70aee4, #3e81e3);
+            border: 1px solid #0a246a;
+            border-top: 1px solid var(--xp-lightest-blue);
+            border-left: 1px solid var(--xp-lightest-blue);
+            color: black;
+            padding: 3px 10px;
+            margin-right: 4px;
+            height: 24px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 150px;
+            cursor: pointer;
+            box-shadow: inset 0 0 0 1px #a4c0e3;
+        }
+
+        .taskbar-button:hover {
+            filter: brightness(1.1);
+        }
+
+        .taskbar-button.active {
+            background: linear-gradient(to top, #70aee4, #3e81e3); /* Inversé pour un effet enfoncé */
+            box-shadow: inset 1px 1px 1px #0a246a;
+            border: 1px solid #0a246a;
+            border-top: 1px solid #a4c0e3;
+            border-left: 1px solid #a4c0e3;
+        }
+
+        /* Zone de Notification */
+        #notification-area {
+            display: flex;
+            align-items: center;
+            height: 100%;
+            background-color: #1b4b8a;
+            border-left: 1px solid #70aee4;
+            padding: 0 4px;
+        }
+
+        #time {
+            color: white;
+            padding: 0 8px;
+            font-size: 11px;
+        }
+
+        .taskbar-icon {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 2px;
+        }
+
+        .taskbar-icon img {
+            width: 18px;
+            height: 18px;
+            vertical-align: middle;
+        }
+
+        /* ---------------------------------------------------- */
+        /* 4. Fenêtres (Pop-ups) */
+        /* ---------------------------------------------------- */
+        .window {
+            position: absolute;
+            top: 50px;
+            left: 50px;
+            width: 600px;
+            max-height: calc(100vh - 80px); /* Taille max pour laisser de la place à la barre des tâches */
+            min-height: 200px;
+            background-color: var(--xp-window-bg);
+            border: 1px solid var(--xp-border-color);
+            box-shadow: 4px 4px 10px rgba(0,0,0,0.5);
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .window.hidden {
+            display: none;
+        }
+
+        .window.minimized {
+            display: none; 
+        }
+
+        /* Fenêtres spéciales pour les images (Présentation, Matrices) */
+        .large-image-window {
+            width: 800px;
+            max-width: 90%;
+            height: 90%;
+            min-height: 400px;
+        }
+
+        .window-image-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 !important;
+        }
+
+        .window-image-content img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            display: block;
+            border-radius: 0;
+        }
+
+        .title-bar {
+            background: linear-gradient(to right, var(--xp-blue), var(--xp-light-blue));
+            color: white;
+            padding: 2px 4px;
+            height: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: grab;
+            flex-shrink: 0;
+        }
+
+        .title-bar-text {
+            font-weight: bold;
+            font-size: 12px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            flex-grow: 1;
+        }
+
+        /* Contrôles de fenêtre (Seulement le bouton Fermer) */
+        .title-bar-controls {
+            display: flex;
+            align-items: center;
+        }
+
+        .title-bar-controls button {
+            background: url('https://www.clker.com//cliparts/5/e/d/8/1225770321258316602emyller_close_button.svg.hi.png') no-repeat center center;
+            background-size: 100% 100%;
+            border: 1px solid #163661;
+            width: 20px;
+            height: 20px;
+            padding: 0;
+            margin-left: 2px;
+            cursor: pointer;
+            box-shadow: 1px 1px 0 rgba(255, 255, 255, 0.7) inset, -1px -1px 0 rgba(0, 0, 0, 0.5) inset;
+        }
+
+        .title-bar-controls button:hover {
+            filter: brightness(1.1);
+        }
+
+        .title-bar-controls button:active {
+            box-shadow: -1px -1px 0 rgba(255, 255, 255, 0.7) inset, 1px 1px 0 rgba(0, 0, 0, 0.5) inset;
+        }
+
+        /* FIX: Le window-body doit toujours avoir un scroll visible pour le contenu long */
+        .window-body {
+            padding: 10px;
+            background-color: var(--xp-light-grey);
+            flex-grow: 1;
+            overflow-y: scroll; /* Garantit que la barre de défilement est toujours disponible pour le contenu long */
+        }
+
+        /* ---------------------------------------------------- */
+        /* 5. Styles de Contenu */
+        /* ---------------------------------------------------- */
+
+        .subject-button {
+            display: block;
+            width: 100%;
+            padding: 4px 8px;
+            margin-bottom: 5px;
+            text-align: left;
+            background: linear-gradient(to bottom, #e3e3e3, #c9c9c9);
+            color: black;
+            border: 1px solid #0a246a;
+            border-top: 1px solid var(--xp-window-bg);
+            border-left: 1px solid var(--xp-window-bg);
+            border-radius: 0;
+            cursor: pointer;
+            transition: background-color 0.1s;
+            text-decoration: none;
+            box-shadow: 1px 1px 0 rgba(255, 255, 255, 0.7) inset, -1px -1px 0 rgba(0, 0, 0, 0.5) inset;
+        }
+
+        .subject-button:hover {
+            background: linear-gradient(to top, #70aee4, #3e81e3);
+            color: white;
+            border: 1px solid #0a246a;
+        }
+
+        .window-body table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        .window-body th, .window-body td {
+            border: 1px solid #999;
+            padding: 5px;
+            text-align: left;
+            color: black;
+            background-color: white;
+        }
+
+        .window-body th {
+            background-color: #ddd;
+        }
+
+        /* Texte Arabe */
+        .arabic-text {
+            direction: rtl;
+            text-align: right;
+            font-family: Tahoma, sans-serif;
+        }
+        
+        /* Styles pour la section ADA et Interdisciplinarité (contenu par défaut) */
+        .ada-display-content {
+            margin-top: 10px;
+            padding: 10px;
+            border: 1px solid #999;
+            background-color: white;
+            border-radius: 0;
+            font-size: 11px;
+            color: black;
+        }
+
+        /* ---------------------------------------------------- */
+        /* 6. Section Paramètres et Fonds d'écran */
+        /* ---------------------------------------------------- */
+
+        #wallpaper-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+            padding: 10px;
+            border: 1px solid #999;
+        }
+
+        .wallpaper-thumb {
+            width: 100px;
+            height: 60px;
+            border: 2px solid #fff;
+            cursor: pointer;
+            transition: border-color 0.2s;
+            background-size: cover;
+            background-position: center;
+            box-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+        }
+
+        .wallpaper-thumb:hover {
+            border-color: var(--xp-light-blue);
+        }
+
+        .wallpaper-thumb.selected {
+            border-color: var(--xp-green);
+            border-width: 3px;
+        }
     </style>
 </head>
 <body>
@@ -67,6 +444,9 @@
                     <img src="https://andrepiolat.csf.bc.ca/wp-content/uploads/sites/5/images/cerclePEI.jpg" alt="Approches de l'apprentissage">
                     <span>Approches de l'apprentissage (ADA)</span>
                 </a>
+            </div>
+
+            <div class="desktop-icons-group">
                 <a href="#" onclick="openWindow('developpement-personnel-window'); return false;" id="developpement-personnel-icon" class="desktop-icon">
                     <img src="https://cityzen-mineraux.fr/-_-/res/191371ed-efcf-4f38-bf28-da05f0d803f9/images/files/191371ed-efcf-4f38-bf28-da05f0d803f9/0ea7d308-01ce-4c5f-9674-19bffa309317/1024-1024/b79417cfa987687d0044778ae703d4f1861e5d8a" alt="Développement personnel">
                     <span>Développement personnel</span>
@@ -76,28 +456,815 @@
                     <span>Politiques et règlements</span>
                 </a>
             </div>
-
-            <div class="desktop-icons-group right-group">
-                <a href="https://felixrouge.github.io/emoji_games" target="_blank" id="jeux-icon" class="desktop-icon">
-                    <img src="https://static.wikia.nocookie.net/the-microsoft-windows-xp/images/a/a4/Folder.png/revision/latest?cb=20200831060955" alt="Jeux">
-                    <span>Jeux</span>
-                </a>
-            </div>
             
         </div>
 
         <div id="settings-window" class="window hidden">
+            <div class="title-bar">
+                <div class="title-bar-text">Paramètres d'affichage</div>
+                <div class="title-bar-controls">
+                    <button aria-label="Close" onclick="closeWindow('settings-window')"></button>
+                </div>
             </div>
+            <div class="window-body">
+                <h3>Changer le Fond d'Écran</h3>
+                <div id="wallpaper-options">
+                    </div>
+            </div>
+        </div>
 
-        </div> 
+        <div id="presentation-window" class="window hidden large-image-window">
+            <div class="title-bar">
+                <div class="title-bar-text">Présentation</div>
+                <div class="title-bar-controls">
+                    <button aria-label="Close" onclick="closeWindow('presentation-window')"></button>
+                </div>
+            </div>
+            <div class="window-body window-image-content">
+                <img src="https://i.imgur.com/pap2vFu.png" alt="Présentation">
+            </div>
+        </div>
+
+        <div id="matrices-comportement-window" class="window hidden large-image-window">
+            <div class="title-bar">
+                <div class="title-bar-text">Matrices des comportements</div>
+                <div class="title-bar-controls">
+                    <button aria-label="Close" onclick="closeWindow('matrices-comportement-window')"></button>
+                </div>
+            </div>
+            <div class="window-body window-image-content">
+                <img src="https://i.imgur.com/Vo8zG9W.jpeg" alt="Matrices des comportements">
+            </div>
+        </div>
+
+        <div id="hg-historique-window" class="window hidden large-image-window">
+            <div class="title-bar">
+                <div class="title-bar-text arabic-text">HG-مكون التاريخ</div>
+                <div class="title-bar-controls">
+                    <button aria-label="Close" onclick="closeWindow('hg-historique-window')"></button>
+                </div>
+            </div>
+            <div class="window-body window-image-content">
+                <img src="https://i.imgur.com/86Zmc98.png" alt="Contenu Historique">
+            </div>
+        </div>
+
+        <div id="hg-geographie-window" class="window hidden large-image-window">
+            <div class="title-bar">
+                <div class="title-bar-text arabic-text">HG-مكون الجغرافيا</div>
+                <div class="title-bar-controls">
+                    <button aria-label="Close" onclick="closeWindow('hg-geographie-window')"></button>
+                </div>
+            </div>
+            <div class="window-body window-image-content">
+                <img src="https://i.imgur.com/VJY7aST.png" alt="Contenu Géographie">
+            </div>
+        </div>
+        <div id="ib-resources-window" class="window hidden">
+            <div class="title-bar">
+                <div class="title-bar-text">Ressources IB transversales</div>
+                <div class="title-bar-controls">
+                    <button aria-label="Close" onclick="closeWindow('ib-resources-window')"></button>
+                </div>
+            </div>
+            <div class="window-body">
+                <h2 style="text-align: center;">Ressources IB transversales</h2>
+                <div id="ib-resources-content" class="modal-text">
+                    <h3 style="margin-top: 0;">Contextes mondiaux</h3>
+                    <ul>
+                        <li>Identités et relations</li>
+                        <li>Orientation dans le temps et l'espace</li>
+                        <li>Innovation scientifique et technique</li>
+                        <li>Mondialisation et durabilité</li>
+                        <li>Équité et développement</li>
+                        <li>Expression personnelle et culturelle</li>
+                    </ul>
+                    <hr>
+                    <h3>Profil de l'apprenant</h3>
+                    <ul>
+                        <li>Chercheurs</li>
+                        <li>Informés</li>
+                        <li>Sensés</li>
+                        <li>Communicatifs</li>
+                        <li>Intègres</li>
+                        <li>Ouverts d'esprit</li>
+                        <li>Altruistes</li>
+                        <li>Audacieux</li>
+                        <li>Équilibrés</li>
+                        <li>Réfléchis</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div id="matieres-window" class="window hidden">
+            <div class="title-bar">
+                <div class="title-bar-text">Matières</div>
+                <div class="title-bar-controls">
+                    <button aria-label="Close" onclick="closeWindow('matieres-window')"></button>
+                </div>
+            </div>
+            <div class="window-body">
+                <h2 id="matiere-title" style="text-align: center;">Matières</h2>
+                <div id="matiere-content-container" class="modal-text">
+                    </div>
+            </div>
+        </div>
+
+        <div id="interdisciplinarite-window" class="window hidden">
+            <div class="title-bar">
+                <div class="title-bar-text">Interdisciplinarité</div>
+                <div class="title-bar-controls">
+                    <button aria-label="Close" onclick="closeWindow('interdisciplinarite-window')"></button>
+                </div>
+            </div>
+            <div class="window-body">
+                <h2 id="interdis-title" style="text-align: center;">Interdisciplinarité</h2>
+                <div id="interdis-content" class="modal-text">
+                    </div>
+            </div>
+        </div>
+
+        <div id="ada-window" class="window hidden">
+            <div class="title-bar">
+                <div class="title-bar-text">Approches de l'apprentissage (ADA)</div>
+                <div class="title-bar-controls">
+                    <button aria-label="Close" onclick="closeWindow('ada-window')"></button>
+                </div>
+            </div>
+            <div class="window-body">
+                <h2 id="ada-title" style="text-align: center;">Approches de l'apprentissage (ADA)</h2>
+                <div id="ada-content" class="modal-text">
+                    </div>
+            </div>
+        </div>
+
+        <div id="developpement-personnel-window" class="window hidden">
+            <div class="title-bar">
+                <div class="title-bar-text">Développement personnel</div>
+                <div class="title-bar-controls">
+                    <button aria-label="Close" onclick="closeWindow('developpement-personnel-window')"></button>
+                </div>
+            </div>
+            <div class="window-body">
+                <h2 style="text-align: center;">Développement personnel</h2>
+                <div class="modal-text">
+                    <p>Je ne sais pas encore quoi mettre ici uwu ^^</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="politiques-reglements-window" class="window hidden">
+            <div class="title-bar">
+                <div class="title-bar-text">Politiques et règlements</div>
+                <div class="title-bar-controls">
+                    <button aria-label="Close" onclick="closeWindow('politiques-reglements-window')"></button>
+                </div>
+            </div>
+            <div class="window-body">
+                <h2 id="politiques-reglements-title" style="text-align: center;">Politiques et règlements</h2>
+                <div id="politiques-reglements-content" class="modal-text">
+                    </div>
+            </div>
+        </div>
+
+    </div> 
     
     <footer id="taskbar">
-        </footer>
+        <a id="start-button" href="https://almadina.ma" target="_blank">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLCVT8-N5jNjDRVRZyl4LnXvb6w4QiajtIFw&s" alt="Madina Logo">
+            <span>Site Madina Schools</span>
+        </a>
+        
+        <div id="taskbar-windows">
+            </div>
+
+        <div id="notification-area">
+            <button id="settings-icon" class="taskbar-icon" onclick="openWindow('settings-window'); return false;">
+                <img src="https://www.rw-designer.com/icon-image/18835-256x256x8.png" alt="Settings Icon">
+            </button>
+            <div id="time">7:06 PM</div>
+        </div>
+    </footer>
     
     <script>
-        /* ... (Le code JavaScript est inchangé) ... */
         const desktop = document.getElementById('desktop');
-        // ... (Reste du JS) ...
+        const taskbarWindows = document.getElementById('taskbar-windows');
+
+        // Liste des URLs pour les fonds d'écran 
+        const wallpaperUrls = [
+            'https://external-preview.redd.it/r6g38aXSaQWtd1KxwJbQ-Fs5jtSVDxX3wtLHJEdqixw.jpg?auto=webp&s=fdee18de73d4f642ccc323470e044ed0f1bae7ea',
+            'https://images3.alphacoders.com/135/1354129.jpeg',
+            'https://images.hdqwalls.com/wallpapers/bliss-windows-xp-remastered-2025-5k-vt.jpg',
+            'https://images8.alphacoders.com/136/1360352.png',
+            'https://getwallpapers.com/wallpaper/full/1/8/3/1226267-windows-xp-wallpaper-1920x1080-for-4k-monitor.jpg',
+            'https://images.hdqwalls.com/wallpapers/windows-xp-bliss-dark-ia.jpg'
+        ];
+        let zIndexCounter = 100;
+        let isDragging = false;
+        let dragWin = null;
+        let offset = { x: 0, y: 0 };
+
+        // ----------------------------------------------------
+        // Contenu Spécifique (Maintenant complet)
+        // ----------------------------------------------------
+
+        // CONTENU COMPLET DU CODE DE VIE (RÈGLEMENT)
+        const reglementContent = `
+            <div class="arabic-text">
+                &bull;  <p>• أنا لا أضيع أدواتي المدرسية، وأحرص على إحضارها باستمرار، لأنها مكون رئيس من مكونات تعليمي.</p>
+                <p>• أتحمل عواقب خروجي من المؤسسة بين الثانية عشرة والواحدة</p>
+                <p>• ألتزم بالدخول إلى الفصل قبل الوقت المحدد حتى لا أزعج زملائي وأساتذتي وأستفيد من الدرس كاملا.</p>
+                <p>• أتحمل مسؤولية عقابي إذا قمت بسلوك أو تصرف غير لائق.</p>
+                <p>• أنجز واجباتي المنزلية وأحضرها في الوقت المحدد، لأن هذا يدخل ضمن مهامي الأساسية.</p>
+                <p>• ألتزم بتبرير أي غياب أو تأخير للإدارة.</p>
+                <p>• أشارك بفعالية في الأنشطة المدرسية غير الصفية حتى أحقق الأهداف السامية للتعلم.</p>
+                <p>• أحافظ على نظافة قسمي وفضاءات المؤسسة بشكل عام، لأن هذا يدخل ضمن مسؤوليتي كتلميذ مسؤول عن ذاته ومحيط تعلمه.</p>
+                <p>• لا أستعمل الهاتف النقال و الأجهزة الإلكترونية داخل المدرسة ما بين الثامنة و الرابعة زوالا كي أتجنب التورط في مشاكل.</p>
+                <br>
+                <p>• أهتم بهندامي ونظافة جسدي، تكريما لنفسي وإظهارا لنعمة الله علي.</p>
+                <p>• على أحرص أن يكون لباسي محتشما ولائقا ،إرضاء لخالقي واحتراما لنفسي.</p>
+                <p>• على أحرص أن لا تتعدى علاقتي مع الجنس الآخر حدود الشرع لكي أنال رضى الله و أسعد في حياتي.</p>
+                <p>• أعترف بأخطائي بلباقة ،لأجنب نفسي العناد والاصطدام والكذب.</p>
+                <p>• أتقبل ذاتي ومظهري،لأنعم بصحة نفسية جيدة وحياة سعيدة.</p>
+                <p>• أنسجم مع المبادئ المتعارف عليها ومعتقداتي،لأشعر بالرضى والسعادة وأبني صورة إيجابية عن ذاتي.</p>
+                <p>• أحترم الوقت وأقدر قيمته،لأنتفع به ولا أفوت على نفسي الفرص الثمينة .</p>
+                <p>• أحافظ على عباداتي وأتحلى بالقيم الحميدة، وأشكر الله، لأنه استأمنني على ذاتي وسخر الكون لخدمتي.</p>
+                <p>• أحرص على أن يكون كلامي مهذبا وراقيا، لأن كلامي مرآة تعكس احترامي لذاتي.</p>
+                <p>• أنتظر دوري بأدب عند اقتناء وجبة الغذاء،لأجنب نفسي الأذى وأمرنها على السلوكات الحضارية في شتى المواقف.</p>
+                <p>• أحتفظ بهدوئي وحلمي،لأجنب نفسي العصبية والغضب.</p>
+                <p>• أتجنب الغش وأثق في قدراتي لأحقق أهدافي وأصل إلى غاياتي.</p>
+                <p>• أحافظ على سلامة ذاتي، لأنها ملك لله استأمنني عليها فلا يجب أن أخون الأمانة.</p>
+                <p>• أقدر عملي وأتوخى الإحسان فيه لأحقق ذاتي وأسعدها.</p>
+                <p>• أعود نفسي على التعلم الدائم، لأن المعرفة لا حدود لها.</p>
+                <p>• أحرص على أن أكون متفائلا مقبلا على الحياة لأكون سعيدا معطاء وخدوما.</p>
+                <br>
+                <p>• لكي يحترم رأي أحترم رأي الآخر</p>
+                <p>• لاكتساب محبة الآخرين و تقديرهم أتجنب كل المشاجرات و الخصومات و أعتذر عند الخطأ</p>
+                <p>• لاستمرار العلاقات الجيدة و انعدام الخلافات أفسح المجال للآخرين للاعتذار</p>
+                <p>• لكي أستفيد من الشرح و أدرس في جو يسوده الانضباط و الاحترام أحترم قانون القسم</p>
+                <p>• لكسب ثقة و وقار الأستاذ أحترمه و أقدر مادته و أنجز ما طلب مني</p>
+                <p>• لحصول التفاهم مع الآخرين أتكلم بصوت منخفض و أتحاور بالتي هي أحسن</p>
+                <p>• لنيل مودة الآخرين أتكلم باحترام معهم و لا أستهين بهم و أقدر مجهوداتهم</p>
+                <p>• لتجنب التورط في المشاكل أتجنب أخذ صور الآخرين دون إذن منهم</p>
+                <p>• لنيل رضى الله ثم الناس أساعد الآخرين على الصلح فيما بينهم</p>
+                <br>
+                <p>في علاقتي بالمسجد :</p>
+                <ul>
+                    <li>لكوني مؤمن صالح محب لله و رسوله ، ألتزم بآداب المسجد تقديسا لبيت الله تعالى.</li>
+                    <li>لأن النظافة من الإيمان ،فأنا أعتني بنظافة جسدي و ملابسي و خاصة جواربي حتى لا أزعج المصلين و أنال رضا الله تعالى.</li>
+                    <li>لأني مؤمن محب للجمال و النظام ، أضع حذائي في المكان المخصص له قبل الدخول إلى المسجد حتى أتجنب عرقلة المصلين و تشويه مدخله.</li>
+                    <li>لأنني محب للنظام ،أعيد ممتلكات المسجد من قرآن كريم و عبايات و سجاد و كتب إلى مكانها بعد الاستعمال حتى أستفيد منها مرة أخرى و يستفيد منها غيري.</li>
+                    <li>لأنال الأجر و التواب الجزيل ، أعود نفسي على الاهتمام بزينة المسجد و مرافقه.</li>
+                </ul>
+                <br>
+                <p>في علاقتي بالقسم :</p>
+                <ul>
+                    <li>كي أدرس في فضاء نقي و صحي ،أحافظ على نظافتي و نظافة قسمي بتجنب رمي الأوراق و النجارة و الطباشير.</li>
+                    <li>كي أدرس في فضاء نظيف و صحي ، أتجنب الخربشة على الطاولات و السبورة و الجدران ،و إلصاق العلكة تحت الكراسي ، و تكسير حوامل المعاطف.</li>
+                    <li>كي لا أكون أنانيا ، أتجنب إزالة الإخباريات و الوثائق الإدارية من سبورة الإعلام حتى يستفيد و يطلع عليها كل التلاميذ.</li>
+                    <li>كي أدرس في أجواء ملائمة ، أتجنب تكسير النوافذ و الكراسي و الطاولات ،و تقطيع الستائر.</li>
+                    <li>كي أكون أمينا و مؤدبا ، أحترم ممتلكات زملائي، و لا أستعملها إلا بإذن منهم .</li>
+                    <li>كي أكون تلميذا نموذجيا مؤثرا ، أساهم في تزيين قسمي و المحافظة على جماله.</li>
+                </ul>
+                <br>
+                <p>في علاقتي بالمكتبة :</p>
+                <ul>
+                    <li>كي أستفيد أكثر و أتجنب إزعاج زملائي ، ألتزم بآداب المكتبة و قانونها الداخلي .</li>
+                    <li>كي أدرس في فضاء صحي و نقي ، أحافظ على نظافة المكتبة برمي النفايات في مكانها المخصص ، وتجنب تناول الطعام فيها.</li>
+                    <li>كي يستفيد زملائي من مقتنيات و تجهيزات المكتبة و أتجنب الأنانية ، أعيد الكتب التي اقتنيتها في الآجال المحددة دون تمزيقها أو إتلافها.</li>
+                </ul>
+                <br>
+                <p>في علاقتي بالساحة و الممرات و المناطق الخضراء</p>
+                <ul>
+                    <li>كي أعيش في بيئة نظيفة و صحية ، أتجنب رمي الأزبال و نفايات طعامي في الساحة و الممرات و المناطق الخضراء .</li>
+                    <li>كي أكون من أصدقاء البيئة ،أتجنب قطع الورود و الأزهار ، و الكتابة على الجدران .</li>
+                    <li>كي أحافظ على سلامتي و سلامة غيري ، لا أركض في الممرات و الساحة ، أو ألعب الكرة فيها.</li>
+                </ul>
+                <br>
+                <p>في علاقتي بالمطعم</p>
+                <ul>
+                    <li>كي أحافظ على النظام و لا أكون أنانيا ، أحترم دوري في الصف ، و أتجنب الفوضى و التسابق مع الآخرين.</li>
+                    <li>كي أحافظ على البيئة و أتجنب إزعاج المساعدات ، أتناول وجباتي في المكان المخصص لذلك ، و أرمي البقايا في القمامية ، و أعيد الأواني إلى مكانها المخصص.</li>
+                    <li>كي أحافظ على سلامة صحتي ،أشتري من المطعم ما يكفيني من الأغذية الصحية دون تبذير أو إسراف.</li>
+                </ul>
+                <br>
+                <p>في علاقتي بالملاعب و قاعة السينما و المسرح</p>
+                <ul>
+                    <li>كي أحافظ على مبدإ السلامة ، لا أستعمل هذه الفضاءات إلا في الأوقات المحددة لي، أو بعد إذن أحد المسؤولين ( الإدارة – أستاذ الرياضة – أستاذ المسرح ...).</li>
+                    <li>كي أمارس هواياتي في جو صحي و نظيف ، أحافظ على نظافة هذه الفضاءات و أدعو نفسي و زملائي إلى تجنب إلحاق أي ضرر بها.</li>
+                </ul>
+                <br>
+                <p>في علاقتي بالصنابير و المراحيض :</p>
+                <ul>
+                    <li>كي لا أكون مبذرا، أتجنب تضييع الورق الصحي و الصابون و الماء .</li>
+                    <li>كي أحافظ على النظافة ، أتأكد من تنظيف المرحاض بعد قضاء الحاجة</li>
+                </ul>
+                <br>
+                <p>في علاقتي بتجهيزات المختبر و قاعة الإعلاميات :</p>
+                <ul>
+                    <li>كي أستفيد و يستفيد غيري ، أستعمل التجهيزات المخبرية و المعلوماتية بحرص و تركيز حتى لا ألحق الضرر بها. </li>
+                    <li>كي أكون منظما و أمينا ، أعيد التجهيزات التي استعملتها إلى مكانها أو إلى حالتها الأولى حتى أستفيد منها مرة أخرى</li>
+                </ul>
+                <br>
+                <p>في مدارس المدينة، نؤمن أن السلوك القويم ضروري لضمان الظروف الملائمة للحياة الجماعية</p>
+                <p>في مدارس المدينة نشجع على الالتزام بقانون الحياة ولا نقبل الإخلال به</p>
+                <br>
+                <h3>المساعــــدات</h3>
+                <p>إلى جانب النتائج السلبية، سأقبل واحدة أو أكثر من التدابير التي تساعدني على تقويم سلوكي:</p>
+                <ul>
+                    <li>ألتقي بالأستاذ الرئيسي لإيجاد حلول لتقويم سلوكي</li>
+                    <li>أقوم بأعمال إضافية تساعدني على فهم وتقويم تصرفاتي ( بحوث- عروض- تقارير..)</li>
+                    <li>أقوم بتوقيع تعهد أوالتزام بعدم تكرار تصرفاتي السلبية</li>
+                    <li>ألتقي بالمستشار في التوجيه أو أخصائي لتقويم السلوك( طبيب نفساني)</li>
+                    <li>أقوم بإعداد رسالة اعتذار.</li>
+                </ul>
+                <br>
+                <h3>العواقب السلبيــــــة</h3>
+                <p>إذا لم أحترم الضوابط الضرورية لقانون الحياة، سأقبل واحدة أو أكثر من العقوبات التالية:</p>
+                <ul>
+                    <li>أخجل من نفسي وأكون بحالة نفسية سيئة</li>
+                    <li>أساتذتي ووالدي غير فخورين بي</li>
+                    <li>أحجز نصف ساعة خلال فترة الاستراحة الزوالية داخل مكان للتفكير</li>
+                    <li>أحجز مدة محددة داخل قاعة المداومة لإنجاز الواجبات والتمارين.</li>
+                    <li>يستدعى أو يخبر أولياء أمري مع ما يترتب عن ذلك من نتائج</li>
+                    <li>أحرم من الخرجات البيداغوجية والترفيهية ومن الأنشطة الموازية</li>
+                    <li>أقوم بتعويض الأضرار اللاحقة بالأدوات والأجهزة الناجمة عن سلوكي وتصرفاتي</li>
+                    <li>أحرم من ولوج المؤسسة وأظل بمنزلي مدة معينة لكي أفكر مليا في سلوكي</li>
+                    <li>أتوصل بإنذار شفوي أو كتابي</li>
+                    <li>أقوم بأعمال داخل المؤسسة ( ترتيب وتنظيف أماكن تناول الوجبات- تنظيف وترتيب الأقسام ..)</li>
+                    <li>أتحمل قرارات مجلس الانضباط</li>
+                    <li>أقبل تدخل أي طرف من الفاعلين في العملية التربوية (أساتذة، أعوان، إداريون، حراس، مساعدات...) وفي حالة رفضي الانصياع لهم واحترام تدخلهم أتعرض لعقوبات زجرية.</li>
+                    <li>تحتفظ المؤسسة بحقها الكامل في اتخاذ العقوبات الزجرية الملائمة لتقويم سلوكي وتصرفاتي...</li>
+                </ul>
+                <br>
+                <h3>الحوافــــــز</h3>
+                <p>إذا احترمت القواعد المتعلق بقانون الحياة، بإم
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <a href="#" class="subject-button back-to-list" style="text-align: center;">Retour</a>
+        `;
+
+        const matiereListHTML = `
+            <a href="#" class="subject-button" data-matiere="Français">Français</a>
+            <a href="#" class="subject-button" data-matiere="Arabe">Arabe</a>
+            <a href="#" class="subject-button" data-matiere="Mathématiques">Mathématiques</a>
+            <a href="#" class="subject-button" data-matiere="Éducation islamique">Éducation islamique</a>
+            <a href="#" class="subject-button" data-matiere="Sciences de la Vie et de la Terre">Sciences de la Vie et de la Terre</a>
+            <a href="#" class="subject-button" data-matiere="Anglais">Anglais</a>
+            <a href="#" class="subject-button" data-matiere="Physique chimie">Physique chimie</a>
+            <a href="#" class="subject-button" data-matiere="Informatique/Robotique">Informatique/Robotique</a>
+            <a href="#" class="subject-button" data-matiere="Histoire-Géographie">Histoire-Géographie</a>
+            <a href="#" class="subject-button" data-matiere="Design">Design</a>
+            <a href="#" class="subject-button" data-matiere="Service communautaire">Service communautaire</a>
+            <a href="#" class="subject-button">Éducation artistique</a>
+            <a href="#" class="subject-button">Théâtre</a>
+            <a href="#" class="subject-button">Professeur Principal</a>
+            <a href="#" class="subject-button">Arts plastiques</a>
+        `;
+
+        const matiereDetailsHTML = `
+            <a href="#" class="subject-button" data-action="objectifs">Les objectifs de la matière</a>
+            <a href="#" class="subject-button" data-action="criteres">Les critères d'évaluation</a>
+            <a href="#" class="subject-button" data-action="concepts">Les concepts étudiés</a>
+            <a href="#" class="subject-button" data-action="reflexions">Les réflexions des élèves sur les apprentissages et la compréhension conceptuelle, ainsi que les axes de progrès identifiés suite à chaque unité</a>
+            <a href="#" class="subject-button back-to-list">Retour aux matières</a>
+        `;
+        
+        // Nouvelle structure de contenu pour les détails spécifiques des matières
+        const matiereSpecificContent = {
+            "Histoire-Géographie": {
+                "concepts": `
+                    <p>Concepts étudiés en Histoire-Géographie (HG):</p>
+                    <a href="#" class="subject-button arabic-text" data-sub-action="historique">HG-مكون التاريخ</a> 
+                    <a href="#" class="subject-button arabic-text" data-sub-action="geographie">HG-مكون الجغرافيا</a> 
+                    <br>
+                    <a href="#" class="subject-button back-to-options" data-matiere-detail="details">Retour aux détails de la matière</a>
+                `,
+                // Le contenu "historique" et "geographie" sont gérés par l'ouverture d'une nouvelle fenêtre
+                "historique": `<p class="arabic-text">Le contenu Histoire est affiché dans une fenêtre séparée.</p><a href="#" class="subject-button back-to-concepts">Retour aux concepts HG</a>`,
+                "geographie": `<p class="arabic-text">Le contenu Géographie est affiché dans une fenêtre séparée.</p><a href="#" class="subject-button back-to-concepts">Retour aux concepts HG</a>`,
+                // Contenu par défaut pour les autres sections (Objectifs, Critères, Réflexions)
+                "default": (action) => `<p>Contenu par défaut pour **${action}** en Histoire-Géographie.</p><a href="#" class="subject-button back-to-options" data-matiere-detail="details">Retour aux détails de la matière</a>`
+            },
+            // Ajoutez d'autres matières ici si elles ont un contenu spécifique
+            "default": (matiere, action) => `<p>Contenu par défaut pour **${action}** dans la matière **${matiere}**.</p><a href="#" class="subject-button back-to-options" data-matiere-detail="details">Retour aux détails de la matière</a>`
+        };
+
+        const adaContentData = {
+            "presentation": `
+                <h3>Domaines et sous-domaines des ADA</h3>
+                <p>Les approches de l'apprentissage (ADA) sont les compétences transversales que les élèves développent et appliquent dans tous les domaines d'étude.</p>
+                <ul>
+                    <li><strong>Recherche :</strong><ul><li>Culture de l'information</li><li>Culture des médias</li></ul></li>
+                    <li><strong>Dimension Sociale :</strong><ul><li>Collaboration</li></ul></li>
+                    <li><strong>Communication :</strong><ul><li>Communication</li></ul></li>
+                    <li><strong>Autogestion :</strong><ul><li>Organisation</li><li>Compétences affectives</li><li>Compétences de réflexion</li></ul></li>
+                    <li><strong>Pensée :</strong><ul><li>Pensée critique</li><li>Pensée créative</li><li>Transfert</li></ul></li>
+                </ul>
+            `,
+            "application": `<p>Contenu sur l'application des compétences en classe et dans la vie quotidienne. Ce contenu pourrait inclure des exemples de projets, des études de cas ou des activités pratiques. **À compléter avec vos exemples spécifiques.**</p>
+                <a href="#" class="subject-button back-to-options" data-ada="accueil">Retour au menu ADA</a>
+            `,
+            "reflexion": `<p>Contenu sur la réflexion des élèves sur leurs apprentissages et les stratégies qu'ils ont mises en œuvre. Ce contenu pourrait inclure des grilles d'auto-évaluation ou des exemples de journaux de bord. **À compléter avec vos grilles et journaux.**</p>
+                <a href="#" class="subject-button back-to-options" data-ada="accueil">Retour au menu ADA</a>
+            `
+        };
+
+        // ----------------------------------------------------
+        // 1. Initialisation & Gestion du Temps
+        // ----------------------------------------------------
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeWallpaperOptions();
+            updateTime();
+            setInterval(updateTime, 1000);
+            makeWindowsDraggable();
+            
+            // Initialise les états de contenu
+            document.getElementById("matiere-content-container").innerHTML = matiereListHTML;
+            showInterdisMainContent();
+            showPolitiquesReglementsMainContent();
+            showAdaMainContent();
+        });
+
+        function updateTime() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('fr-FR', {
+                hour: 'numeric',
+                minute: '2-digit',
+                hour12: false
+            });
+            document.getElementById('time').textContent = timeString;
+        }
+
+        // ----------------------------------------------------
+        // 2. Fonctions de Fenêtre (XP Style)
+        // ----------------------------------------------------
+
+        function openWindow(windowId) {
+            const win = document.getElementById(windowId);
+            const taskbarButtonId = 'task-' + windowId.replace('-window', '');
+            
+            // CORRECTION 2: Réinitialisation du contenu dynamique lors de l'ouverture
+            if (windowId === 'politiques-reglements-window') {
+                showPolitiquesReglementsMainContent();
+            } else if (windowId === 'matieres-window') {
+                // Réinitialiser le titre et le contenu de la fenêtre Matières
+                document.getElementById("matiere-title").textContent = "Matières";
+                document.getElementById("matiere-content-container").innerHTML = matiereListHTML;
+            } else if (windowId === 'interdisciplinarite-window') {
+                // Réinitialiser le contenu de la fenêtre Interdisciplinarité
+                showInterdisMainContent();
+            } else if (windowId === 'ada-window') {
+                // Réinitialiser le contenu de la fenêtre ADA
+                showAdaMainContent();
+            }
+            
+            if (!document.getElementById(taskbarButtonId)) {
+                const titleText = win.querySelector('.title-bar-text').textContent;
+                const button = document.createElement('button');
+                button.id = taskbarButtonId;
+                button.className = 'taskbar-button';
+                button.textContent = titleText;
+                button.onclick = () => toggleWindow(windowId);
+                taskbarWindows.appendChild(button);
+            }
+            
+            win.classList.remove('hidden', 'minimized');
+            focusWindow(windowId);
+        }
+
+        function closeWindow(windowId) {
+            const win = document.getElementById(windowId);
+            win.classList.add('hidden');
+            
+            const taskbarButtonId = 'task-' + windowId.replace('-window', '');
+            const taskbarButton = document.getElementById(taskbarButtonId);
+            if (taskbarButton) {
+                taskbarButton.remove();
+            }
+            
+            const nextWin = document.querySelector('.window:not(.hidden):not(.minimized)');
+            if (nextWin) {
+                focusWindow(nextWin.id);
+            }
+        }
+
+        function minimizeWindow(windowId) {
+            const win = document.getElementById(windowId);
+            win.classList.add('minimized');
+            
+            const taskbarButton = document.getElementById('task-' + windowId.replace('-window', ''));
+            if (taskbarButton) {
+                taskbarButton.classList.remove('active');
+            }
+        }
+
+        function toggleWindow(windowId) {
+            const win = document.getElementById(windowId);
+            if (win.classList.contains('hidden') || win.classList.contains('minimized')) {
+                win.classList.remove('hidden', 'minimized');
+                focusWindow(windowId);
+            } else {
+                minimizeWindow(windowId);
+            }
+        }
+        
+        function focusWindow(windowId) {
+            document.querySelectorAll('.window').forEach(w => w.classList.remove('active'));
+            document.querySelectorAll('.taskbar-button').forEach(b => b.classList.remove('active'));
+
+            const win = document.getElementById(windowId);
+            win.classList.add('active');
+            win.style.zIndex = ++zIndexCounter;
+
+            const taskbarButton = document.getElementById('task-' + windowId.replace('-window', ''));
+            if (taskbarButton) {
+                taskbarButton.classList.add('active');
+            }
+        }
+
+        function makeWindowsDraggable() {
+            document.querySelectorAll('.window').forEach(win => {
+                const titleBar = win.querySelector('.title-bar');
+                if (!titleBar) return;
+
+                titleBar.addEventListener('mousedown', (e) => {
+                    if (e.target.closest('.title-bar-controls button')) return;
+                    
+                    isDragging = true;
+                    dragWin = win;
+                    focusWindow(win.id);
+                    offset.x = e.clientX - win.offsetLeft;
+                    offset.y = e.clientY - win.offsetTop;
+                    titleBar.style.cursor = 'grabbing';
+                    e.preventDefault();
+                });
+            });
+
+            document.addEventListener('mousemove', (e) => {
+                if (!isDragging || !dragWin) return;
+
+                let newX = e.clientX - offset.x;
+                let newY = e.clientY - offset.y;
+
+                const desktopHeight = desktop.offsetHeight;
+                const desktopWidth = desktop.offsetWidth;
+                const winWidth = dragWin.offsetWidth;
+                const winHeight = dragWin.offsetHeight;
+
+                newX = Math.max(0, Math.min(newX, desktopWidth - winWidth));
+                newY = Math.max(0, Math.min(newY, desktopHeight - winHeight));
+                
+                dragWin.style.left = newX + 'px';
+                dragWin.style.top = newY + 'px';
+            });
+
+            document.addEventListener('mouseup', () => {
+                if (isDragging && dragWin) {
+                    dragWin.querySelector('.title-bar').style.cursor = 'grab';
+                }
+                isDragging = false;
+                dragWin = null;
+            });
+        }
+
+        // ----------------------------------------------------
+        // 3. Gestion du Fond d'Écran (Section Paramètres)
+        // ----------------------------------------------------
+
+        function initializeWallpaperOptions() {
+            const container = document.getElementById('wallpaper-options');
+            wallpaperUrls.forEach(url => {
+                const thumb = document.createElement('div');
+                thumb.className = 'wallpaper-thumb';
+                thumb.style.backgroundImage = `url('${url}')`;
+                thumb.dataset.url = url;
+                thumb.onclick = () => selectWallpaper(url, thumb);
+                container.appendChild(thumb);
+            });
+
+            selectWallpaper(wallpaperUrls[0], document.querySelector(`.wallpaper-thumb[data-url='${wallpaperUrls[0]}']`));
+        }
+
+        function selectWallpaper(url, element) {
+            desktop.style.backgroundImage = `url('${url}')`;
+
+            document.querySelectorAll('.wallpaper-thumb').forEach(thumb => {
+                thumb.classList.remove('selected');
+            });
+            if (element) {
+                element.classList.add('selected');
+            }
+        }
+
+        // ----------------------------------------------------
+        // 4. Gestion du Contenu Dynamique 
+        // ----------------------------------------------------
+
+        function showAdaMainContent() {
+            const adaContent = document.getElementById("ada-content");
+            adaContent.innerHTML = `
+                <a href="#" class="subject-button" data-ada="presentation">Présentation des cinq domaines de compétence ADA ainsi que leurs sous domaines</a>
+                <a href="#" class="subject-button" data-ada="application">Application des compétences</a>
+                <a href="#" class="subject-button" data-ada="reflexion">Réflexion sur les compétences ADA développées et les stratégies mises en oeuvre</a>
+                <div class="ada-display-content">Cliquez sur l'un des boutons ci-dessus pour afficher le contenu détaillé.</div>
+            `;
+        }
+
+        function showInterdisMainContent() {
+            const interdisTitle = document.getElementById("interdis-title");
+            const interdisContent = document.getElementById("interdis-content");
+            interdisTitle.textContent = "Interdisciplinarité";
+            interdisContent.innerHTML = `
+                <a href="#" class="subject-button" data-unit="Unité 1">Unité 1</a>
+                <a href="#" class="subject-button" data-unit="Unité 2">Unité 2</a>
+            `;
+        }
+
+        function showPolitiquesReglementsMainContent() {
+            const politiquesReglementsContent = document.getElementById("politiques-reglements-content");
+            const politiquesReglementsTitle = document.getElementById("politiques-reglements-title");
+            
+            // On s'assure que le titre est bien le titre principal lors du reset
+            politiquesReglementsTitle.textContent = "Politiques et règlements";
+            
+            politiquesReglementsContent.innerHTML = `
+                <a href="https://www.ibo.org/globalassets/new-structure/programmes/shared-resources/pdfs/academic-integrity-policy-fr.pdf" target="_blank" class="subject-button">Politique d'intégrité</a>
+                <a href="#" class="subject-button" data-reglement="Règlement">Règlement</a>
+                <a href="#" class="subject-button" data-reglement="Matrices">Matrices de l'enseignement des comportements</a>
+            `;
+        }
+        
+        // Fonction pour afficher le contenu de détail d'une matière (Objectifs, Critères, etc.)
+        function showMatiereDetailContent(matiere, action) {
+            const matiereContentContainer = document.getElementById("matiere-content-container");
+            const specificData = matiereSpecificContent[matiere];
+            
+            if (specificData && specificData[action]) {
+                // Contenu spécifique (ex: concepts HG)
+                matiereContentContainer.innerHTML = specificData[action];
+            } else if (specificData && specificData["default"]) {
+                // Contenu par défaut pour la matière si l'action est listée dans 'default'
+                matiereContentContainer.innerHTML = specificData["default"](action);
+            } else {
+                // Contenu générique par défaut pour toutes les autres matières/actions
+                matiereContentContainer.innerHTML = matiereSpecificContent["default"](matiere, action);
+            }
+        }
+
+
+        // Événements (Utilisation de la délégation pour les fenêtres)
+        document.addEventListener('click', (event) => {
+            const clickedElement = event.target.closest('.subject-button');
+            if (!clickedElement) return;
+
+            const currentWindow = clickedElement.closest('.window');
+            if (!currentWindow) return;
+
+            // Si le bouton est un lien externe (target="_blank"), on ne bloque PAS son action par défaut.
+            if (clickedElement.getAttribute('target') === '_blank') {
+                return; 
+            }
+            
+            event.preventDefault(); // Bloque l'action par défaut (href="#") pour les navigations internes
+
+
+            // Gestion de la fenêtre Matières
+            if (currentWindow.id === 'matieres-window') {
+                const matiereTitle = document.getElementById("matiere-title");
+                const matiereContentContainer = document.getElementById("matiere-content-container");
+                const currentMatiere = matiereTitle.textContent;
+
+                // 1. Clic sur une matière dans la liste principale
+                if (clickedElement.dataset.matiere) {
+                    matiereTitle.textContent = clickedElement.dataset.matiere;
+                    matiereContentContainer.innerHTML = matiereDetailsHTML;
+                } 
+                // 2. Clic sur "Retour aux matières"
+                else if (clickedElement.classList.contains("back-to-list")) {
+                    matiereTitle.textContent = "Matières";
+                    matiereContentContainer.innerHTML = matiereListHTML;
+                }
+                // 3. Clic sur Objectifs, Critères, Concepts, Réflexions (data-action)
+                else if (clickedElement.dataset.action) {
+                    showMatiereDetailContent(currentMatiere, clickedElement.dataset.action);
+                }
+                // 4. Clic sur un sous-détail (ex: Histoire ou Géographie) (data-sub-action)
+                else if (clickedElement.dataset.subAction) {
+                    const subAction = clickedElement.dataset.subAction;
+                    
+                    if (subAction === "historique") {
+                        // Action spéciale: Ferme la fenêtre matières et ouvre la fenêtre image HISTORIQUE.
+                        closeWindow('matieres-window');
+                        openWindow('hg-historique-window');
+                        return; // Arrête le reste du traitement pour éviter les conflits
+                    }
+                    
+                    if (subAction === "geographie") {
+                        // Action spéciale: Ferme la fenêtre matières et ouvre la fenêtre image GÉOGRAPHIE.
+                        closeWindow('matieres-window');
+                        openWindow('hg-geographie-window');
+                        return; // Arrête le reste du traitement pour éviter les conflits
+                    }
+
+                    // Pour les autres sous-actions (non définies), on affiche le contenu normal
+                    const content = matiereSpecificContent[currentMatiere] && matiereSpecificContent[currentMatiere][subAction] 
+                                    ? matiereSpecificContent[currentMatiere][subAction] 
+                                    : `<p>Contenu détaillé pour **${subAction}**.</p><a href="#" class="subject-button back-to-concepts">Retour aux concepts HG</a>`;
+                    matiereContentContainer.innerHTML = content;
+                }
+                // 5. Clic sur "Retour aux concepts HG" (depuis Histoire/Géographie)
+                else if (clickedElement.classList.contains("back-to-concepts")) {
+                    // On retourne au menu des concepts de HG
+                    if (matiereSpecificContent[currentMatiere] && matiereSpecificContent[currentMatiere]["concepts"]) {
+                        matiereContentContainer.innerHTML = matiereSpecificContent[currentMatiere]["concepts"];
+                    }
+                }
+                // 6. Clic sur "Retour aux détails de la matière" (depuis Objectifs, Critères, Concepts génériques)
+                else if (clickedElement.classList.contains("back-to-options") && clickedElement.dataset.matiereDetail === "details") {
+                    matiereContentContainer.innerHTML = matiereDetailsHTML;
+                }
+            }
+            
+            // Gestion de la fenêtre Interdisciplinarité
+            if (currentWindow.id === 'interdisciplinarite-window') {
+                const interdisTitle = document.getElementById("interdis-title");
+                const interdisContent = document.getElementById("interdis-content");
+
+                // 1. Clic sur Unité 1 ou Unité 2
+                if (clickedElement.dataset.unit) {
+                    interdisTitle.textContent = clickedElement.dataset.unit;
+                    interdisContent.innerHTML = `
+                        <a href="#" class="subject-button" data-action="produit">Produit final</a>
+                        <a href="#" class="subject-button" data-action="reflexion">Réflexion</a>
+                        <br>
+                        <a href="#" class="subject-button back-to-list">Retour aux unités</a>
+                    `;
+                } 
+                // 2. Clic sur Produit final ou Réflexion (affiche un contenu par défaut)
+                else if (clickedElement.dataset.action === "produit" || clickedElement.dataset.action === "reflexion") {
+                    const actionText = clickedElement.textContent;
+                    interdisContent.innerHTML = `
+                        <h3>${actionText} - ${interdisTitle.textContent}</h3>
+                        <div class="ada-display-content">
+                            Le contenu pour cette section sera inséré ici (par exemple, un lien vers le document, un PDF, ou un texte de réflexion).
+                            <p>Merci de remplacer ce texte par votre contenu réel.</p>
+                        </div>
+                        <a href="#" class="subject-button back-to-options">Retour aux options de l'unité</a>
+                    `;
+                } 
+                // 3. Retour aux options de l'unité (depuis Produit/Réflexion)
+                else if (clickedElement.classList.contains("back-to-options")) {
+                    const currentUnitTitle = interdisTitle.textContent;
+                    interdisContent.innerHTML = `
+                        <a href="#" class="subject-button" data-action="produit">Produit final</a>
+                        <a href="#" class="subject-button" data-action="reflexion">Réflexion</a>
+                        <br>
+                        <a href="#" class="subject-button back-to-list">Retour aux unités</a>
+                    `;
+                    interdisTitle.textContent = currentUnitTitle; // Conserver le titre de l'unité
+                }
+                // 4. Retour aux unités (depuis le menu d'une unité)
+                else if (clickedElement.classList.contains("back-to-list")) {
+                    showInterdisMainContent();
+                }
+            }
+
+            // Gestion de la fenêtre ADA
+            if (currentWindow.id === 'ada-window') {
+                const adaCategory = clickedElement.dataset.ada;
+                const displayContent = currentWindow.querySelector(".ada-display-content");
+                
+                if (adaCategory === "accueil") {
+                    showAdaMainContent();
+                } else if (adaCategory && adaContentData[adaCategory]) {
+                    // Les données du contenu ADA contiennent déjà le bouton de retour, 
+                    // on peut simplement remplacer l'intégralité du contenu dynamique.
+                    displayContent.innerHTML = adaContentData[adaCategory];
+                }
+            }
+            
+            // Gestion de la fenêtre Politiques et règlements
+            if (currentWindow.id === 'politiques-reglements-window') {
+                const politiquesReglementsTitle = document.getElementById("politiques-reglements-title");
+                const politiquesReglementsContent = document.getElementById("politiques-reglements-content");
+                const reglementCategory = clickedElement.dataset.reglement;
+                
+                if (reglementCategory === "Règlement") {
+                    politiquesReglementsTitle.textContent = "Règlement";
+                    politiquesReglementsContent.innerHTML = reglementContent;
+                } else if (reglementCategory === "Matrices") {
+                    closeWindow('politiques-reglements-window');
+                    openWindow('matrices-comportement-window');
+                } else if (clickedElement.classList.contains("back-to-list")) {
+                    showPolitiquesReglementsMainContent();
+                }
+            }
+        });
     </script>
 </body>
 </html>
