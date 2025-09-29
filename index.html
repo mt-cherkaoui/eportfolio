@@ -347,6 +347,20 @@
             color: white;
             border: 1px solid #0a246a;
         }
+        
+        /* Style spécifique pour le bouton arabe pour plus de visibilité */
+        .arabic-criteria-button {
+            background: linear-gradient(to bottom, #ffc107, #ff9800); /* Couleur jaune/orange */
+            color: black;
+            border: 1px solid #9c4d00;
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        .arabic-criteria-button:hover {
+            background: linear-gradient(to top, #ff9800, #ffc107);
+        }
+
 
         .window-body table {
             width: 100%;
@@ -732,7 +746,7 @@
                 <ul>
                     <li>كي أستفيد أكثر و أتجنب إزعاج زملائي ، ألتزم بآداب المكتبة و قانونها الداخلي .</li>
                     <li>كي أدرس في فضاء صحي و نقي ، أحافظ على نظافة المكتبة برمي النفايات في مكانها المخصص ، وتجنب تناول الطعام فيها.</li>
-                    <li>كي يستفيد زملائي من مقتنيات و تجهيزات المكتبة و أتجنب الأنانية ، أعيد الكتب التي اقتنيتها في الآجال المحددة دون تمزيقها أو إتلافها.</li>
+                    <li>كي يستفيد زملائي من م اقتنيات و تجهيزات المكتبة و أتجنب الأنانية ، أعيد الكتب التي اقتنيتها في الآجال المحددة دون تمزيقها أو إتلافها.</li>
                 </ul>
                 <br>
                 <p>في علاقتي بالساحة و الممرات و المناطق الخضراء</p>
@@ -848,6 +862,21 @@
                 "geographie": `<p class="arabic-text">Le contenu Géographie est affiché dans une fenêtre séparée.</p><a href="#" class="subject-button back-to-concepts">Retour aux concepts HG</a>`,
                 // Contenu par défaut pour les autres sections (Objectifs, Critères, Réflexions)
                 "default": (action) => `<p>Contenu par défaut pour **${action}** en Histoire-Géographie.</p><a href="#" class="subject-button back-to-options" data-matiere-detail="details">Retour aux détails de la matière</a>`
+            },
+            // Ajout du contenu spécifique pour les CRITÈRES de la matière Arabe
+            "Arabe": {
+                "criteres": `
+                    <h3>Critères d'évaluation - Arabe</h3>
+                    <p>Cliquez sur le bouton ci-dessous pour ouvrir le document des objectifs qualitatifs et des critères d'évaluation.</p>
+                    <a href="https://1drv.ms/w/c/e2f2ae3911973e1c/EZmpuO8KXSlNhRh0fbmmWVIBRldwM7vrzgNF6JlSlxyH4g?e=EIDFFK" 
+                       target="_blank" 
+                       class="subject-button arabic-criteria-button arabic-text">
+                        (معايير التقويم)الأهداف النوعية للغة العربية
+                    </a>
+                    <hr>
+                    <a href="#" class="subject-button back-to-options" data-matiere-detail="details">Retour aux détails de la matière</a>
+                `,
+                "default": (action) => `<p>Contenu par défaut pour **${action}** dans la matière **Arabe**.</p><a href="#" class="subject-button back-to-options" data-matiere-detail="details">Retour aux détails de la matière</a>`
             },
             // Ajoutez d'autres matières ici si elles ont un contenu spécifique
             "default": (matiere, action) => `<p>Contenu par défaut pour **${action}** dans la matière **${matiere}**.</p><a href="#" class="subject-button back-to-options" data-matiere-detail="details">Retour aux détails de la matière</a>`
@@ -1102,18 +1131,21 @@
         // Fonction pour afficher le contenu de détail d'une matière (Objectifs, Critères, etc.)
         function showMatiereDetailContent(matiere, action) {
             const matiereContentContainer = document.getElementById("matiere-content-container");
-            const specificData = matiereSpecificContent[matiere];
             
-            if (specificData && specificData[action]) {
-                // Contenu spécifique (ex: concepts HG)
-                matiereContentContainer.innerHTML = specificData[action];
-            } else if (specificData && specificData["default"]) {
-                // Contenu par défaut pour la matière si l'action est listée dans 'default'
-                matiereContentContainer.innerHTML = specificData["default"](action);
-            } else {
-                // Contenu générique par défaut pour toutes les autres matières/actions
-                matiereContentContainer.innerHTML = matiereSpecificContent["default"](matiere, action);
+            // 1. Vérifie le contenu spécifique pour cette matière et cette action
+            if (matiereSpecificContent[matiere] && matiereSpecificContent[matiere][action]) {
+                matiereContentContainer.innerHTML = matiereSpecificContent[matiere][action];
+                return;
             }
+
+            // 2. Vérifie le contenu par défaut de la matière si l'action n'est pas spécifique
+            if (matiereSpecificContent[matiere] && matiereSpecificContent[matiere]["default"]) {
+                 matiereContentContainer.innerHTML = matiereSpecificContent[matiere]["default"](action);
+                 return;
+            }
+            
+            // 3. Contenu générique (cas par défaut)
+            matiereContentContainer.innerHTML = matiereSpecificContent["default"](matiere, action);
         }
 
 
