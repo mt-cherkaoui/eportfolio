@@ -6,13 +6,7 @@
     <title>Mon E-Portfolio - Windows XP Edition</title>
     
     <style>
-        /* * Windows XP Theme CSS
-         * Basé sur le style "Luna" (Bleu) et Tahoma 
-         */
 
-        /* ---------------------------------------------------- */
-        /* 1. Général & Police (Tahoma) */
-        /* ---------------------------------------------------- */
         :root {
             --xp-blue: #245195;
             --xp-light-blue: #3e81e3;
@@ -35,20 +29,16 @@
         body {
             margin: 0;
             padding: 0;
-            overflow: hidden; /* Empêche le défilement du bureau */
+            overflow: hidden;
             background-color: #3a6ea5; /* Couleur de secours */
         }
 
-        /* ---------------------------------------------------- */
-        /* 2. Le Bureau et Fond d'écran */
-        /* ---------------------------------------------------- */
         #desktop {
             position: fixed;
             top: 0;
             left: 0;
             width: 100vw;
-            height: calc(100vh - 28px); /* Laisse de la place pour la barre des tâches */
-            /* Fond d'écran initial demandé */
+            height: calc(100vh - 28px);
             background-image: url('https://external-preview.redd.it/r6g38aXSaQWtd1KxwTjQ-Fs5jtSVDxX3wtLHJEdqixw.jpg?auto=webp&s=fdee18de73d4f642ccc323470e044ed0f1bae7ea');
             background-size: cover;
             background-repeat: no-repeat;
@@ -56,19 +46,18 @@
             transition: background-image 0.5s ease;
         }
 
-        /* Styles pour les icônes du bureau */
         .desktop-icons-container {
             position: absolute;
             top: 20px;
             left: 20px;
             display: flex;
-            gap: 30px; /* Espace entre les deux colonnes d'icônes */
+            gap: 30px; 
         }
 
         .desktop-icons-group {
             display: flex;
             flex-direction: column;
-            gap: 15px; /* Espace entre les icônes dans une colonne */
+            gap: 15px; 
             align-items: flex-start;
         }
 
